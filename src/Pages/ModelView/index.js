@@ -161,6 +161,7 @@ function ModelView() {
                                 value={view} onChange={setView}
                             />
                             <Table
+                                
                                 pagination={false}
                                 size="small"
                                 columns={columns1}
