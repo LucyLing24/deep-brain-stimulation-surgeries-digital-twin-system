@@ -11,3 +11,345 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* --------- */
+/* Login */
+/* --------- */
+
+.login {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:url('./Assets/bg.jpg') !important;
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 48px;
+
+  position: absolute;
+  width: 360px;
+  height: 468px;
+  left: calc(50% - 360px/2);
+  top: calc(50% - 468px/2 - 10px);
+}
+
+/* --------- */
+/* Menu */
+/* --------- */
+.menu {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:url('./Assets/bg.jpg') !important;
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.menu-view{
+  background-color: transparent;
+  color: #FFFFFF;
+}
+.menu-view::selection{
+  color:  #1890FF;;
+}
+.menu-search{
+  /* Auto layout */
+  padding-top:160px;
+  gap: 24px;
+}
+.menu-card{
+background-color: transparent;
+  border: none;
+  color: #FFFFFF;
+  display:flex;
+  padding: 16px 16px 16px 12px;
+  gap: 12px;
+
+  width: 349px;
+  height: 160px;
+}
+.menu-card-title{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+}
+.menu-card-content{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+}
+/* --------- */
+/* Footer */
+/* --------- */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 24px;
+  background-color:black;
+}
+.footer-copyright {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 3px;
+  padding-left: 24px;
+  padding-right: 24px;
+  gap: 210px;
+  color: #BFBFBF;
+}
+.footer-text{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 18px;
+  color: #BFBFBF;
+}
+.model{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #dadada;
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+/* --------- */
+/* Datalist */
+/* --------- */
+.datalist{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #dadada;
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.datalist-side{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 0px;
+  gap: 24px;
+
+  width: 100px;
+  height: 992px;
+
+  /* Grey/Background LL */
+  background: #F2F2F2;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+.datalist-side-title {
+  height: 26px;
+
+  /* 18_Heavy */
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  /* black */
+  color: #000000;
+}
+.datalist-side-title-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  right: 24px;
+  height: 64px;
+  float: left;
+  gap: 24px;
+}
+.datalist-card-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  left: 90px;
+  float: left;
+  gap: 10px;
+}
+.datalist-side-content {
+  padding-top: 70%;
+  /* 12_Medium */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+
+  /* Functional/text/color-secondary */
+  color: rgba(0, 0, 0, 0.45);
+}
+.datalist-card{
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  height: 280px;
+  border: none;
+}
+.bread{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 8px;
+  height: 64px;
+
+  /* blue/6 */
+  background: #1890FF;
+  color: #FFFFFF;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+/* --------- */
+/* Header */
+/* --------- */
+.header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  gap: 24px;
+  height: 64px;
+}
+.header-title1{
+  height: 28px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+}
+.header-title2{
+  height: 18px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+}
+.header-icon{
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  right: 24px;
+  gap: 36px;
+  height: 64px;
+  float: left;
+  color: #FFFFFF;
+}
+.header-user{
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  gap: 16px;
+  height: 64px;
+  float: left;
+}
+.pageheader{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  gap: 24px;
+  height: 64px;
+  background-color: #001529;
+}
+.construct-window{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  /* identical to box height, or 157% */
+  display: flex;
+  align-items: center;
+
+  /* Grey/Unchosen texts */
+  color: #808080;
+
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.view-title {
+  height: 26px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  /* black */
+  color: #000000;
+}
+.view-hu {
+  height: 26px;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: #000000;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.button{
+  border-radius: 0;
+  margin: 5px;
+}
+
+.button:disabled{
+  background: rgba(24, 144, 255, 0.58);
+  color: #FFFFFF;
+}
+.body-card{
+ border-Radius: 0;
+  border:none;
+}
