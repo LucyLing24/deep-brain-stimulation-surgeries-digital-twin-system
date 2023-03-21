@@ -36,16 +36,14 @@ function Login() {
                         layout={"vertical"}
                         onFinish={onFinish}
                     >
-                        <Form.Item required label={<label style={{color: "white"}}>用户名</label>}>
+                        <Form.Item name="username" required label={<label style={{color: "white"}}>用户名</label>}>
                             <Input placeholder="请输入用户名或者邮箱"/>
                         </Form.Item>
-                        <Form.Item required label={<label style={{color: "white"}}>密码</label>}>
+                        <Form.Item name="password" required label={<label style={{color: "white"}}>密码</label>}>
                             <Input.Password placeholder="请输入密码"/>
                         </Form.Item>
                         <br/>
-                        <Form.Item>
-                            <Button block type="primary" htmlType="submit" style={{background: "#52C41A"}}>登陆</Button>
-                        </Form.Item>
+                        <Button block type="primary" htmlType="submit" style={{background: "#52C41A"}}>登陆</Button>
                     </Form>
                 </div>
 

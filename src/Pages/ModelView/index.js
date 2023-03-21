@@ -3,7 +3,7 @@ import {
     Button,
     Card,
     Checkbox,
-    Col, Radio,
+    Col, InputNumber, Radio,
     Row,
     Segmented,
     Slider,
@@ -20,10 +20,37 @@ import nopic from "../../Assets/PatientInfo/noPic.png";
 import mode0 from "../../Assets/hu/mode0.png"
 import mode1 from "../../Assets/hu/mode1.png"
 import mode2 from "../../Assets/hu/mode2.png"
+import Unity, {UnityContext} from "react-unity-webgl";
+import defaultpic1 from "../../Assets/PatientInfo/defaultpic1.png";
 
+const unityContext = new UnityContext({
+    loaderUrl: "Scene2_WebGL/Build/Scene2_WebGL.asm.loader.js",
+    dataUrl: "Scene2_WebGL/Build/Scene2_WebGL.data",
+    frameworkUrl: "Scene2_WebGL/Build/Scene2_WebGL.asm.framework.js",
+    codeUrl: "Scene2_WebGL/Build/Scene2_WebGL.asm.js",
+    memoryUrl:"Scene2_WebGL/Build/Scene2_WebGL.asm.mem",
+    streamingAssetsUrl: "StreamingAssets",
+    companyName: "DefaultCompany",
+    productName: "UnityVolumeRendering",
+    productVersion: "0.1",
+});
+
+function showModal(){
+    unityContext.send("EditTrans", "Show");
+}
+function changeMax(data){
+    unityContext.send("SetVisibilityMAX", "VisibilityMAXSet_ForWebGL",data);
+}
 
 function ModelView() {
-    const [view, setView] = useState("card")
+    const [view, setView] = useState("list")
+    const [inputValue, setInputValue] = useState(0.2);
+    const [model, setModel] = useState(0);
+
+    const onChange = (newValue) => {
+        setInputValue(newValue);
+        changeMax(newValue);
+    };
     const blockcolumns = [
         {
             title: '序号',
@@ -49,20 +76,24 @@ function ModelView() {
     ];
     const blockdata=[
         {
+            key:0,
             index:"0",
             block:"Skin",
             visible:true
         },
         {
+            key:1,
             index:"1",
             block:"Left_hemisphere",
             visible:false
         },
         {
+            key:2,
             index:"2",
             block:"Right_hemisphere",
             visible:true
         },{
+            key:3,
             index:"3",
             block:"Cerebellum",
             visible:true
@@ -88,43 +119,40 @@ function ModelView() {
     ];
     const data1=[
         {
+            key:0,
             index:"0",
             file:"DT Model024",
             date:"11/12/2022",
             stage:"术前影像阶段"
         },
-        {
+        {key:1,
             index:"1",
             file:"DT Model025",
             date:"11/12/2022",
             stage:"术前影像阶段"
 
         },
-        {
+        {key:2,
             index:"2",
             file:"DT Model026",
             date:"11/12/2022",
             stage:"术前影像阶段"
         }
     ];
-    const marks= {
-        0: '-1000',
-        25: '-500',
-        50: '0',
-        75:'500',
-        100: '1000+',
-    };
 
-    const rowSelection = {
+    const rowSelection1 = {
         onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-        },
-        getCheckboxProps: (record: DataType) => ({
-            disabled: record.name === 'Disabled User', // Column configuration not to be checked
-            name: record.name,
-        }),
+            if(selectedRowKeys.length===0){
+                setModel(0)
+            }else{
+                setModel(1)
+            }
+        }
     };
-
+    const rowSelection2 = {
+        onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+        }
+    };
 
     return (
         <section className="model">
@@ -135,7 +163,7 @@ function ModelView() {
             />
             <Row gutter={12}>
                 <Col span={6}>
-                    <Card style={{height: "79.5vh", borderRadius: 0, marginLeft: "12px",overflowY:"scroll"}}>
+                    <Card style={{height: `calc(100vh - 168px)`, borderRadius: 0, marginLeft: "12px",overflowY:"scroll"}}>
                         <div className="view-title">
                             孪生模型查看
                             <Button size="small" style={{background: '#1890FF', color: "white"}}>
@@ -146,27 +174,27 @@ function ModelView() {
                             <Segmented
                                 style={{margin: "10px 0px", float: "left"}}
                                 options={
-                                    [{
-                                        label: '平铺视图',
-                                        value: 'card',
-                                        icon: <WindowsOutlined/>,
-                                    },
+                                    [
                                         {
                                             label: '列表视图',
                                             value: 'list',
                                             icon: <MenuOutlined/>,
                                         },
-
+                                        {
+                                            label: '平铺视图',
+                                            value: 'card',
+                                            icon: <WindowsOutlined/>,
+                                        },
                                     ]}
                                 value={view} onChange={setView}
                             />
                             <Table
-                                
+
                                 pagination={false}
                                 size="small"
                                 columns={columns1}
                                 dataSource={data1}
-                                rowSelection={rowSelection}
+                                rowSelection={rowSelection1}
                                 scroll={{x: 400}}
                             />
                         </div>
@@ -202,11 +230,26 @@ function ModelView() {
                             <div className="datalist-side-title" style={{marginTop:"10px",fontSize: "15px"}}>
                                 HU值滤镜
                             </div>
-                            <div className="construct-window">
+                            <div className="construct-window" style={{marginBottom:10}}>
                                 显示范围
-                                <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                <Slider
+                                    min={0}
+                                    max={0.8}
+                                    onChange={onChange}
+                                    value={typeof inputValue === 'number' ? inputValue : 0}
+                                    step={0.01}
+                                    defaultValue={0.4} style={{marginLeft: "30px", width: "30%"}}
+                                />
+                                <InputNumber
+                                    min={0}
+                                    max={0.8}
+                                    style={{ margin: '0 12px' }}
+                                    step={0.01}
+                                    value={inputValue}
+                                    onChange={onChange}
+                                />
                             </div>
-                            <Button style={{width:"100%"}} icon={<StockOutlined />}>高级设置</Button>
+                            <Button style={{width:"100%"}} icon={<StockOutlined />} onClick={showModal}>高级设置</Button>
                         </div>
                         <div className="datalist-side-title" style={{marginTop:"10px",fontSize:"15px"}} >
                             分区可见性
@@ -216,18 +259,22 @@ function ModelView() {
                             size="small"
                             columns={blockcolumns}
                             dataSource={blockdata}
-                            rowSelection={rowSelection}
+                            rowSelection={rowSelection2}
                             scroll={{y:"20vh"}}
                         />
                 </Card>
                 </Col>
                 <Col span={18}>
-                    <Card style={{height: "79.5vh", borderRadius: 0, background: "#000000"}}>
-                        <img
-                            src={nopic}
-                            style={{height:"77.5vh"}}
-                        />
-                    </Card>
+                    {
+                        model === 0 ?
+                            <div style={{background: 'black',marginRight:12}}>
+                                <img
+                                    src={defaultpic1}
+                                    style={{height: `calc(100vh - 170px)`}}
+                                />
+                            </div>:
+                            <Unity style={{'width': '99%', 'height': '99%'}} unityContext={unityContext}/>
+                    }
                 </Col>
             </Row>
         </section>

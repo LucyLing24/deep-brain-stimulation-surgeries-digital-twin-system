@@ -1,11 +1,30 @@
 import React, { useState } from "react";
 import {Header} from "antd/es/layout/layout";
-import {Avatar, Breadcrumb} from "antd";
+import {Avatar, Breadcrumb, Dropdown} from "antd";
 import logo from "../Assets/logo.svg";
 import {CaretDownFilled, NotificationFilled, SettingFilled, UserOutlined} from '@ant-design/icons';
 import Search from "antd/es/input/Search";
-import modelConstruct from "../Pages/ModelConstruct";
-
+const items: MenuProps['items'] = [
+    {
+        key: '0',
+        label: (
+            <div onClick={()=>{
+                window.location.replace('*')}}>
+                切换账号
+            </div>
+        )
+    },
+    {
+        key: '1',
+        label: (
+            <div onClick={()=>{
+                window.location.replace('*')}}>
+                退出登陆
+            </div>
+        ),
+        danger:true
+    }
+];
 function PageHeader() {
 
     const onSearch = (value: string) => console.log(value);
@@ -17,7 +36,7 @@ function PageHeader() {
                 alt="logo"
                 style={{width: '38px'}}
                 onClick={()=>{
-                    window.location.replace("/")
+                    window.location.replace("menu")
                 }}
             />
             <div>
@@ -39,8 +58,10 @@ function PageHeader() {
                 <NotificationFilled/>
                 <div className="header-user">
                     <Avatar style={{backgroundColor: '#bfbfbf'}} icon={<UserOutlined/>}/>
-                    username
-                    <CaretDownFilled/>
+                    神经外科 王颖
+                    <Dropdown menu={{items ,selectable: true,}} placement="bottomRight" arrow={{pointAtCenter: true}} >
+                        <CaretDownFilled/>
+                    </Dropdown>
                 </div>
             </div>
         </Header>

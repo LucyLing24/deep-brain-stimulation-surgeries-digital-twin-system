@@ -1,5 +1,5 @@
 import PageHeader from "../../Components/PageHeader";
-import {Avatar, Button, Card, Cascader, Col, Dropdown, Row, Tag} from "antd";
+import {Avatar, Button, Card, Cascader, Col, Dropdown, Modal, Row, Tag} from "antd";
 import {
     ClockCircleOutlined,
     DeleteOutlined,
@@ -8,7 +8,7 @@ import {
     PlusCircleOutlined, UserOutlined
 } from "@ant-design/icons";
 import Search from "antd/es/input/Search";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import { DatePicker} from 'antd';
 import _ from "lodash";
@@ -18,9 +18,21 @@ import p2 from "../../Assets/PatientInfo/patient2.png";
 import p3 from "../../Assets/PatientInfo/patient3.png";
 import p4 from "../../Assets/PatientInfo/patient4.png";
 import p5 from "../../Assets/PatientInfo/patient5.png";
+import c1 from "../../Assets/PatientInfo/create.png";
+
+import d0 from "../../Assets/datalist/detail0.png";
+import d1 from "../../Assets/datalist/detail1.png";
+import d2 from "../../Assets/datalist/detail2.png";
+
+import d3 from "../../Assets/PatientInfo/patientDetail.png";
 const { RangePicker } = DatePicker;
 
+
 function DataList() {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [mode,setMode]=useState('list')
+
     const items = [
         {
             key: '1',
@@ -57,169 +69,59 @@ function DataList() {
         },
     ];
 
-    const data=[
+    const rawdata=[
         {
             id:1,
             pic:p0,
-            name:"患者姓名1",
-            age:72,
-            sex:"女",
-            stage:"术前影像阶段",
-            prob:"帕金森（pd）",
-            status:"",
-            model:[
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-            ],
+            name:"张超英"
         },
         {
             id:1,
             pic:p1,
-            name:"患者姓名1",
-            age:72,
-            sex:"女",
-            stage:"术前影像阶段",
-            prob:"帕金森（pd）",
-            status:"",
-            model:[
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-            ],
+            name:"患者姓名1"
         },
         {
             id:2,
             pic: p2,
-            name:"患者姓名2",
-            age:55,
-            sex:"男",
-            stage:"电级植入阶段",
-            prob:"癫痫",
-            status:"danger",
-            model:[],
+            name:"患者姓名2"
         },{
             id:3,
             pic: p3,
-            name:"患者姓名3",
-            age:68,
-            sex:"女",
-            stage:"电池和导线连接阶段",
-            prob:"重度抑郁症",
-            status:"",
-            model:[
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-            ],
+            name:"患者姓名3"
         },{
             id:4,
             pic: p4,
-            name:"患者姓名4",
-            age:42,
-            sex:"男",
-            stage:"电刺激治理阶段",
-            prob:"癫痫",
-            status:"danger",
-            model:[
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-            ],
+            name:"患者姓名4"
         },{
             id:5,
             pic: p5,
-            name:"患者姓名5",
-            age:63,
-            sex:"男",
-            stage:"术前影像阶段",
-            prob:"帕金森（pd）",
-            status:"",
-            model:[
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-            ],
+            name:"患者姓名5"
         },{
             id:6,
             pic: p5,
-            name:"患者姓名5",
-            age:63,
-            sex:"男",
-            stage:"术前影像阶段",
-            prob:"帕金森（pd）",
-            status:"",
-            model:[
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-                {
-                    time: "11/22/22",
-                    model: ""
-                },
-            ],
+            name:"患者姓名5"
         }
     ];
 
+    const [searchword, setSearchWord] = useState("")
+
+    const [data, setData] = useState()
+
+    useEffect(() => {
+        const data = _.map(rawdata, (item) => {
+            if (item?.name.match(searchword)) {
+                return item;
+            }
+        }).filter((i)=>{if(i!==undefined)return i})
+        setData(data)
+    }, [searchword])
+
+    const onSearch = (value: string) => {
+        setSearchWord(value)
+    };
+
     const options = [
-        {
-            value: 'zhejiang',
-            label: 'Zhejiang',
-            children: [
-                {
-                    value: 'hangzhou',
-                    label: 'Hangzhou',
-                    children: [
-                        {
-                            value: 'xihu',
-                            label: 'West Lake',
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            value: 'jiangsu',
-            label: 'Jiangsu',
-            children: [
-                {
-                    value: 'nanjing',
-                    label: 'Nanjing',
-                    children: [
-                        {
-                            value: 'zhonghuamen',
-                            label: 'Zhong Hua Men',
-                        },
-                    ],
-                },
-            ],
-        },
+        {}
     ];
 
     const onChange = (
@@ -237,6 +139,7 @@ function DataList() {
     return (
         <section className="datalist">
             <PageHeader/>
+            {mode==='list'?
             <Row>
                 <Col span={20}>
                     <Card style={{margin: "10px", height: `calc(100vh - 108px)`, borderRadius: 0}}>
@@ -249,7 +152,7 @@ function DataList() {
                                 <Button icon={<DeleteOutlined/>}>
                                     删除患者
                                 </Button>
-                                <Button style={{background: '#1890FF', color: "white"}} icon={<PlusCircleOutlined/>}>
+                                <Button style={{background: '#1890FF', color: "white"}} icon={<PlusCircleOutlined/>} onClick={()=>{setIsModalOpen(true)}}>
                                     新增患者
                                 </Button>
                             </div>
@@ -263,26 +166,26 @@ function DataList() {
                                 </Col>
                                 <Col span={5} >
                                     科室{"\t"}
-                                    <Cascader options={options} onChange={onChange} placeholder="选择科室" />
+                                    <Cascader size={"small"} options={options} onChange={onChange} placeholder="选择科室" />
                                 </Col>
                                 <Col span={5}>
                                     治疗阶段{"\t"}
-                                    <Cascader options={options} onChange={onChange} placeholder="患者治理阶段" />
+                                    <Cascader size={"small"} options={options} onChange={onChange} placeholder="患者治理阶段" />
                                 </Col>
                                 <Col span={7}>
                                     时间段{"\t"}
-                                    <RangePicker />
+                                    <RangePicker size={"small"}/>
                                 </Col>
                                 <Col span={6} >
                                     患者姓名{"\t"}
-                                    <Search placeholder="搜索" allowClear style={{ width: 200 }} />
+                                    <Search size={"small"} placeholder="搜索" allowClear style={{ width: 200 }}  onSearch={onSearch}/>
                                 </Col>
                             </Row>
                         </div><br/>
                         <Row gutter={[24, 24]}>
                             {_.map(data, (item, index) => {
                                 return (
-                                    <Col span={4}>
+                                    <Col span={4.5}>
                                         <Card
                                             className="datalist-card"
                                               style={{cursor: "pointer"}}
@@ -292,9 +195,11 @@ function DataList() {
                                                 src={item.pic}
                                                 alt="logo"
                                                 style={{width: '170px',height:"200px"}}
+                                                onClick={()=>{setMode('detail')}}
                                             />
                                             <div className="datalist-card-button">
-                                                <Button size={"small"} >
+                                                <Button size={"small"}
+                                                        onClick={()=>{setMode('detail')}}>
                                                     详情
                                                 </Button>
                                                 <Dropdown menu={{ items }} placement="bottomRight" arrow={{ pointAtCenter: true }}>
@@ -311,17 +216,35 @@ function DataList() {
                     </Card>
                 </Col>
                 <Col span={4}>
-                    <Card style={{height: `calc(100vh - 88px)`, borderRadius: 0,background:"#F2F2F2"}}>
-                        <div className="datalist-side-title">
-                            数据看板
-                        </div>
-                        <div className="datalist-side-content">
-                            <FundProjectionScreenOutlined className="datalist-side-content"/>
-                            <div>暂无数据统计</div>
-                        </div>
-                    </Card>
+                    <div style={{height: `calc(100vh - 88px)`, borderRadius: 0,background:"#F2F2F2"}}>
+                        <img
+                            src={d0}
+                            style={{width:"100%"}}
+                        />
+                    </div>
                 </Col>
-            </Row>
+            </Row>:
+                <>
+                    <img src={d3} style={{width:"100%"}}/>
+                <Card style={{marginLeft: "12px",marginRight: "12px", height: `calc(100vh - 168px)`, borderRadius: 0,overflowY:"scroll"}}>
+                    <Button onClick={()=>{setMode('list')}} type={"primary"} style={{marginBottom:10,float:"left",borderRadius:0}}>返回全部患者</Button>
+                    <img src={d1} style={{width:"100%"}}/>
+                    <img src={d2} style={{width:"100%"}}/>
+                </Card> </>
+            }
+
+            <Modal
+                open={isModalOpen}
+                onOk={()=>{setIsModalOpen(false)}}
+                onCancel={()=>{setIsModalOpen(false)}}
+                width={1100}
+            >
+                <img
+
+                src={c1}
+                style={{width:"100%"}}/>
+
+            </Modal>
         </section>
     );
 }

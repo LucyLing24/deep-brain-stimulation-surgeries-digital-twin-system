@@ -7,7 +7,7 @@ import React, {useState} from "react";
 function OperationList(props) {
     const {setCreate}=props;
     const [hasData, setdata] = useState(true);
-    const [view, setView] = useState(false);
+    const [view, setView] = useState('list');
 
     const rowSelection = {
         onChange: () => {
@@ -58,9 +58,8 @@ function OperationList(props) {
                             </Button>
                         </div>
                     </div>
-                    <br/>
                     <Segmented
-                        style={{margin: "10px 0px", float: "left"}}
+                        style={{margin: "15px 0px", float: "left"}}
                         options={
                             [
                                 {

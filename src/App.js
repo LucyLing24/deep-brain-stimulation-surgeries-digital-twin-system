@@ -14,6 +14,7 @@ import ModelConstruct from "./Pages/ModelConstruct";
 import ModelView from "./Pages/ModelView";
 import OperationDesign from "./Pages/OperationDesign";
 import DataList from "./Pages/DataList";
+import Assistant from "./Pages/Assistant";
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -37,6 +38,7 @@ function App() {
             <Route path="/modelconstruct" element={<ModelConstruct />} />
             <Route path="/modelview" element={<ModelView />} />
             <Route path="/operation" element={<OperationDesign />} />
+            <Route path="/assistance" element={<Assistant />} />
             <Route path="*" element={<Navigate to="/"/>} />
           </Routes>
           <Footer />

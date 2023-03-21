@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import {Button, Card, Modal, Slider, Table, Tabs, Typography} from "antd";
+import {Button, Card, Col, Modal, Row, Slider, Table, Tabs, Typography} from "antd";
 import operation_plan_area_data from "../../Const/operation_plan_area_data";
 import operation_plan_area_columns from "../../Const/operation_plan_area_columns";
 import tips from "../../../Assets/tips.jpeg"
 import tips1 from "../../../Assets/tips1.jpeg"
 import Search from "antd/es/input/Search";
+import Unity, {UnityContext} from "react-unity-webgl";
 
 const createtab=[
     {
@@ -47,8 +48,17 @@ const createtab=[
         </div>,
     },
 ]
-
-
+const unityContext3 = new UnityContext({
+    loaderUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.loader.js",
+    dataUrl: "Scene3_WebGL/Build/Scene3_WebGL.data",
+    frameworkUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.framework.js",
+    codeUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.js",
+    memoryUrl:"Scene3_WebGL/Build/Scene3_WebGL.asm.mem",
+    streamingAssetsUrl: "StreamingAssets",
+    companyName: "DefaultCompany",
+    productName: "UnityVolumeRendering",
+    productVersion: "0.1",
+});
 function Area() {
 
     const [selectedRowKeys,setSelectedRowKeys]=useState([]);
@@ -74,41 +84,52 @@ function Area() {
     const hasSelected = setSelectedRowKeys.length > 0;
 
     return (
-        <div style={{width: '100%', height: `63vh`}}>
-            <div>
-                <div className="datalist-side-title" style={{fontSize:16,fontWeight:"bold"}}>核团AI标注
-                </div>
-                <div style={{margin:"10px 0px"}}>
-                    <Search placeholder="搜索核团"></Search>
-                </div>
-                <Table
-                    pagination={false}
-                    size="small"
-                    columns={operation_plan_area_columns}
-                    dataSource={operation_plan_area_data}
-                    rowSelection={rowSelection}
-                    scroll={{y: "36vh"}}
-                />
-                <div>
-                    <Typography.Text style={{
-                        marginTop: 2,
-                        fontSize: 10,
-                        color: "lightgrey"
-                    }}>*AI标注功能以标准模版为依据并根据影像进行初步配准，若需提升标注精度请进行手动调整</Typography.Text>
-                </div>
-            </div>
-            <div style={{position: "absolute", bottom: 0, right: 0}}>
-                <Button style={{background: "#1890FF", color: "white"}} className="button" onClick={()=>window.location.reload()}>配准并导入</Button>
-                <Button disabled={!hasSelected} className="button" style={{background: "#52c41a", color: "white"}}
-                        onClick={() => {
-                            setShowModal(true)
-                        }}>手动调整</Button>
-            </div>
-            <Modal title="手动调整" open={showModal} onOk={handleOk} onCancel={handleCancel}>
-               <Tabs defaultActiveKey="0" items={createtab}>
-               </Tabs>
-            </Modal>
-        </div>
+        <Row gutter={12}>
+            <Col span={6}>
+                <Card className='body-card'
+                      style={{height: `calc(100vh - 226px)`,  overflowY: "scroll"}}>
+
+                    <div style={{width: '100%', height: `63vh`}}>
+                        <div>
+                            <div className="datalist-side-title" style={{fontSize:16,fontWeight:"bold"}}>核团AI标注
+                            </div>
+                            <div style={{margin:"10px 0px"}}>
+                                <Search placeholder="搜索核团"></Search>
+                            </div>
+                            <Table
+                                pagination={false}
+                                size="small"
+                                columns={operation_plan_area_columns}
+                                dataSource={operation_plan_area_data}
+                                rowSelection={rowSelection}
+                                scroll={{y: "36vh"}}
+                            />
+                            <div>
+                                <Typography.Text style={{
+                                    marginTop: 2,
+                                    fontSize: 10,
+                                    color: "lightgrey"
+                                }}>*AI标注功能以标准模版为依据并根据影像进行初步配准，若需提升标注精度请进行手动调整</Typography.Text>
+                            </div>
+                        </div>
+                        <div style={{position: "absolute", bottom: 0, right: 0}}>
+                            <Button style={{background: "#1890FF", color: "white"}} className="button" onClick={()=>window.location.reload()}>配准并导入</Button>
+                            <Button disabled={!hasSelected} className="button" style={{background: "#52c41a", color: "white"}}
+                                    onClick={() => {
+                                        setShowModal(true)
+                                    }}>手动调整</Button>
+                        </div>
+                        <Modal title="手动调整" open={showModal} onOk={handleOk} onCancel={handleCancel}>
+                            <Tabs defaultActiveKey="0" items={createtab}>
+                            </Tabs>
+                        </Modal>
+                    </div>
+                </Card>
+            </Col>
+            <Col span={18}>
+                <Unity style={{'width': '99%', height: `calc(100vh - 226px)`,}} unityContext={unityContext3}/>
+            </Col>
+        </Row>
     )
 }
 

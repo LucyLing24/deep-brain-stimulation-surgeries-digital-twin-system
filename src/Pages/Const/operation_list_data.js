@@ -2,6 +2,7 @@ import React from "react";
 
 const operation_list_data = [
     {
+        key:0,
         index: "0",
         star: true,
         name: "plan 001",
@@ -18,6 +19,7 @@ const operation_list_data = [
         test: "否"
     },
     {
+        key:1,
         index: "1",
         star: true,
         name: "plan 001",
@@ -33,6 +35,7 @@ const operation_list_data = [
         point4pos: "---",
         test: "否"
     }, {
+        key:2,
         index: "2",
         star: true,
         name: "plan 001",
@@ -48,6 +51,7 @@ const operation_list_data = [
         point4pos: "---",
         test: "否"
     }, {
+        key:3,
         index: "3",
         star: true,
         name: "plan 001",

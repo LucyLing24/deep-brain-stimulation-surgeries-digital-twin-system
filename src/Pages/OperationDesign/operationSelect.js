@@ -8,7 +8,7 @@ import operation_select_data from "../Const/operation_select_data";
 function OperationSelect(props) {
     const {setSelect} =props;
     const [nextButton, setNextButton] = useState(false)
-    const [view, setView] = useState(false);
+    const [view, setView] = useState('list');
 
     const rowSelection = {
         onChange: () => {
@@ -19,8 +19,6 @@ function OperationSelect(props) {
             name: record.name,
         }),
     };
-
-    console.log(operation_select_data,operation_select_columns)
 
     return (
         <Row gutter={12}>
@@ -62,7 +60,6 @@ function OperationSelect(props) {
                                 onClick={() => setSelect(true)}>下一步</Button>
                     </div>
                 </Card>
-                }
             </Col>
             <Col span={18}>
                 <Card className='body-card'

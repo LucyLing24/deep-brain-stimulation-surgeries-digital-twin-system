@@ -10,8 +10,6 @@ function OperationDesign() {
 
     const [create, setCreate] = useState(false)
     const [select, setSelect] = useState(false)
-console.log(111,create)
-
     return (
         <section className="model">
             <PageHeader/>

@@ -16,19 +16,37 @@ import {
     Upload
 } from "antd";
 import {
-    DeleteOutlined,
-    ExclamationCircleOutlined, FilterFilled,
+    DeleteOutlined, EditOutlined,
+    ExclamationCircleOutlined, EyeOutlined, FilterFilled,
     FundProjectionScreenOutlined, InboxOutlined, MenuOutlined,
     PlusCircleOutlined, PlusOutlined, WindowsOutlined
 } from "@ant-design/icons";
 import React, {useState} from "react";
 import patientdetial from "../../Assets/PatientInfo/patientDetail.png";
-import defaultpic from "../../Assets/PatientInfo/defaultPic.png";
-import nopic from "../../Assets/PatientInfo/noPic.png";
+import defaultpic0 from "../../Assets/PatientInfo/defaultpic0.png";
+import defaultpic1 from "../../Assets/PatientInfo/defaultpic1.png";
+import defaultpic2 from "../../Assets/defaultpic.jpg";
 import TextArea from "antd/es/input/TextArea";
+import Unity, {UnityContext} from "react-unity-webgl";
+
+const unityContext = new UnityContext({
+    loaderUrl: "Scene1_WebGL/Build/Scene1_WebGL.asm.loader.js",
+    dataUrl: "Scene1_WebGL/Build/Scene1_WebGL.data",
+    frameworkUrl: "Scene1_WebGL/Build/Scene1_WebGL.asm.framework.js",
+    codeUrl: "Scene1_WebGL/Build/Scene1_WebGL.asm.js",
+    memoryUrl:"Scene1_WebGL/Build/Scene1_WebGL.asm.mem",
+    streamingAssetsUrl: "StreamingAssets",
+    companyName: "DefaultCompany",
+    productName: "UnityVolumeRendering",
+    productVersion: "0.1",
+});
 
 function ModelConstruct() {
+
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const [model, setModel] = useState(0);
+    const [pic, setPic] = useState(0);
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -63,24 +81,25 @@ function ModelConstruct() {
     ];
     const data=[
         {
+            key:0,
             index:"0",
             file:"Z...Brain CT024",
             type:"MRI",
             date:"11/12/2022"
         },
-        {
+        {key:1,
             index:"1",
             file:"Z...Brain CT025",
             type:"EEG",
             date:"11/12/2022"
         },
-        {
+        {key:2,
             index:"2",
             file:"Z...Brain CT026",
             type:"CT",
             date:"11/12/2022"
         },
-        {
+        {key:3,
             index:"3",
             file:"Z...Brain CT027",
             type:"CT",
@@ -106,20 +125,20 @@ function ModelConstruct() {
         },
     ];
     const data1=[
-        {
+        {key:0,
             index:"0",
             file:"DT Model024",
             date:"11/12/2022",
             stage:"术前影像阶段"
         },
-        {
+        {key:1,
             index:"1",
             file:"DT Model025",
             date:"11/12/2022",
             stage:"术前影像阶段"
 
         },
-        {
+        {key:2,
             index:"2",
             file:"DT Model026",
             date:"11/12/2022",
@@ -127,16 +146,25 @@ function ModelConstruct() {
         }
     ];
 
-    const rowSelection = {
+    const rowSelection1 = {
         onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-        },
-        getCheckboxProps: (record: DataType) => ({
-            disabled: record.name === 'Disabled User', // Column configuration not to be checked
-            name: record.name,
-        }),
+            if(selectedRowKeys.length===0){
+                setPic(0)
+            }else{
+                setPic(1)
+            }
+        }
     };
-
+    const rowSelection2 = {
+        onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+            if(selectedRowKeys.length===0){
+                setModel(0)
+            }else{
+                setModel(1)
+            }
+            console.log(model)
+        }
+    };
 
 
     return (
@@ -144,7 +172,7 @@ function ModelConstruct() {
             <Modal title="导入影像文件" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <Form
                     labelCol={{ span: 4 }}
-                    wrapperCol={{ span: 14 }}
+                    wrapperCol={{ span: 20 }}
                     layout="horizontal"
                 >
                     <Form.Item label="上传" valuePropName="fileList">
@@ -207,7 +235,7 @@ function ModelConstruct() {
             />
             <Row gutter={12}>
                 <Col span={6}>
-                    <Card style={{height: "79.5vh", borderRadius: 0, marginLeft: "12px", background: "#ffffff"}}>
+                    <Card style={{height: `calc(100vh - 168px)`, borderRadius: 0, marginLeft: "12px",overflowY:"scroll"}}>
                         <div className="datalist-side-title" style={{gap:"36px"}}>
                             医疗影像数据库
                             <div>
@@ -241,7 +269,10 @@ function ModelConstruct() {
                             size="small"
                             columns={columns}
                             dataSource={data}
-                            rowSelection={rowSelection}
+                            rowSelection={{
+                                type: "checkbox",
+                                ...rowSelection1,
+                            }}
                             scroll={{ x: 400 }}
                         /><br/>
                         <div className="datalist-side-title" style={{gap: "10px"}}>
@@ -255,33 +286,43 @@ function ModelConstruct() {
                             位置(mm)
                             <Slider defaultValue={30} style={{marginLeft:"10px",width:"75%"}} />
                         </div>
-                        <img
-                            src={defaultpic}
-                            style={{width:"95%",height:"200px"}}
-                        />
+                        {
+                            pic===0?<img
+                                src={defaultpic0}
+                                style={{width:"95%",height:"200px"}}
+                            />:<img
+                                src={defaultpic2}
+                                style={{width:"95%",height:"200px"}}
+                            />
+                        }
+
 
                     </Card>
                 </Col>
                 <Col span={12}>
-                    <Card style={{height: "79.5vh", borderRadius: 0, background: "#000000"}}>
-                        <img
-                            src={nopic}
-                            style={{height:"77.5vh"}}
-                        />
-                    </Card>
+                    {
+                        model === 0 ?
+                            <div style={{background: 'black'}}>
+                                <img
+                                    src={defaultpic1}
+                                    style={{height: `calc(100vh - 170px)`, width: "100%"}}
+                                />
+                            </div>:
+                            <Unity style={{'width': '99%', 'height': '99%'}} unityContext={unityContext}/>
+                    }
                 </Col>
                 <Col span={6}>
-                    <Card style={{height: "79.5vh", borderRadius: 0,marginRight: "12px"}}>
+                    <Card style={{height: `calc(100vh - 168px)`, borderRadius: 0, marginRight: "12px",overflowY:"scroll"}}>
                         <div className="datalist-side-title" style={{gap: "27px"}}>
                             孪生模型
                             <div>
                                 <Button size="small" style={{marginRight:"5px"}} icon={<DeleteOutlined/>}>
                                     删除
                                 </Button>
-                                <Button size="small" style={{marginRight:"5px"}} icon={<DeleteOutlined/>}>
+                                <Button size="small" style={{marginRight:"5px"}} icon={<EditOutlined />}>
                                     编辑
                                 </Button>
-                                <Button  size="small" style={{background: '#1890FF', color: "white"}} icon={<PlusCircleOutlined/>}>
+                                <Button  size="small" style={{background: '#1890FF', color: "white"}} icon={<EyeOutlined />}>
                                     查看
                                 </Button>
                             </div>
@@ -290,15 +331,14 @@ function ModelConstruct() {
                             style={{margin:"15px 0px",float:"left"}}
                             options={
                                 [{
+                                    label: '列表视图',
+                                    value: 'list',
+                                    icon: <MenuOutlined/>,
+                                },{
                                     label: '平铺视图',
                                     value: 'card',
                                     icon: <WindowsOutlined/>,
-                                },
-                                    {
-                                        label: '列表视图',
-                                        value: 'list',
-                                        icon: <MenuOutlined/>,
-                                    },
+                                }
 
                                 ]}
                             value={view} onChange={setView}
@@ -308,13 +348,71 @@ function ModelConstruct() {
                             size="small"
                             columns={columns1}
                             dataSource={data1}
-                            rowSelection={rowSelection}
+                            rowSelection={rowSelection2}
                             scroll={{ x: 400 }}
                         /><br/>
                         <div className="datalist-side-title" style={{fontSize:"16px"}} >
                             新建孪生模型
                         </div><br />
-                        <Button onClick={showModal} style={{width:"100%"}}><PlusCircleOutlined/>新建</Button>
+
+                        <Form
+                            labelCol={{ span: 4 }}
+                            wrapperCol={{ span: 20 }}
+                            layout="horizontal"
+                        >
+                            <Form.Item label="上传" valuePropName="fileList">
+                                <Upload action="/upload.do" listType="picture-card" >
+                                    <div>
+                                        <InboxOutlined />
+                                        <div style={{ marginTop: 8 }}>上传孪生模型</div>
+                                    </div>
+                                </Upload>
+                            </Form.Item>
+                            <Form.Item label="文件名">
+                                <Input placeholder="请输入文件名"/>
+                            </Form.Item>
+                            <Form.Item label="类型">
+                                <Cascader
+                                    placeholder="请选择数据类型"
+                                    options={[
+                                        {
+                                            value: 'zhejiang',
+                                            label: 'Zhejiang',
+                                            children: [
+                                                {
+                                                    value: 'hangzhou',
+                                                    label: 'Hangzhou',
+                                                },
+                                            ],
+                                        },
+                                    ]}
+                                />
+                            </Form.Item>
+                            <Form.Item label="阶段">
+                                <Cascader
+                                    placeholder="请选择治疗阶段"
+                                    options={[
+                                        {
+                                            value: 'zhejiang',
+                                            label: 'Zhejiang',
+                                            children: [
+                                                {
+                                                    value: 'hangzhou',
+                                                    label: 'Hangzhou',
+                                                },
+                                            ],
+                                        },
+                                    ]}
+                                />
+                            </Form.Item>
+                            <Form.Item label="日期">
+                                <DatePicker placeholder="请选择日期" style={{width:"100%"}}/>
+                            </Form.Item>
+                            <Form.Item label="备注">
+                                <TextArea rows={4} placeholder="请输入备注"/>
+                            </Form.Item>
+                        </Form>
+                        <Button type={"primary"} style={{width:"100%",marginBottom:20}}><PlusCircleOutlined/>新建</Button>
                     </Card>
                 </Col>
             </Row>
