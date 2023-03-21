@@ -4,83 +4,99 @@ import {EyeInvisibleOutlined, EyeOutlined} from "@ant-design/icons";
 
 const operation_plan_area_data = [
     {
+        key:0,
         name:"anterior_part_of_left_middle_frontal_gyrus",
         status:"未导入",
         color:"pink",
         visible:true
     },
     {
+        key:1,
         name:"_left_globus_pallidus_pars_externa",
         status:"未导入",
         color:"red",
         visible:false
     },{
+        key:2,
         name:"_left_globus_pallidus_pars_interna",
         status:"未导入",
         color:"yellow",
         visible:false
     },{
+        key:3,
         name:"_left_subthalamic_nucleus",
         status:"未导入",
         color:"lightblue",
         visible:false
     },{
+        key:4,
         name:"left_caudate_nucleus",
         status:"未导入",
         color:"orange",
         visible:false
     },{
+        key:5,
         name:"left_putamen",
         status:"未导入",
         color:"cyan",
         visible:false
     },{
+        key:6,
         name:"left_ventral_anterior_thalamic_nucleus",
         status:"未导入",
         color:"green",
         visible:false
     },{
+        key:7,
         name:"left_ventral_lateral_thalamic_nucleus",
         status:"未导入",
         color:"blue",
         visible:false
     },
     {
+        key:8,
         name:"left_lateral_dorsal_thalamic_nucleus",
         status:"未导入",
         color:"purple",
         visible:false
     },{
+        key:9,
         name:"left_lateral_posterior_thalamic_nucleus",
         status:"未导入",
         color:"geekblue",
         visible:false
     },{
+        key:10,
         name:"left_ventral_posterolateral_thalamic_nucleus",
         status:"未导入",
         color:"magenta",
         visible:false
     },{
+        key:11,
         name:"anterior_part_of_right_middle_frontal_gyrus",
         status:"未导入",
         color:"volcano",
         visible:false
     },{
+        key:12,
         name:"_right_globus_pallidus_pars_externa",
         status:"未导入",
         color:"gold",
         visible:false
     },{
+        key:13,
         name:"_right_globus_pallidus_pars_interna",
         status:"未导入",
         color:"lime",
         visible:false
     },{
+        key:14,
         name:"_right_subthalamic_nucleus",
         status:"未导入",
         color:"black",
         visible:false
     },{
+        key:15,
         name:"right_caudate_nucleus,right_putamen",
         status:"未导入",
         color:"black",

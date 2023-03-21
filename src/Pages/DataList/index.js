@@ -67,6 +67,17 @@ function DataList() {
                 </div>
             ),
         },
+        {
+            key: '4',
+            label: (
+                <div onClick={() => {
+                    const url = "/assistance";
+                    window.open(url)
+                }} >
+                    电刺激参数设定辅助
+                </div>
+            ),
+        },
     ];
 
     const rawdata=[

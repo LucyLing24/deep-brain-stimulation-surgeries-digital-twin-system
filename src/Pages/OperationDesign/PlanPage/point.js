@@ -17,6 +17,10 @@ const unityContext4 = new UnityContext({
     productName: "UnityVolumeRendering",
     productVersion: "0.1",
 });
+
+function handleAdd() {
+    unityContext4.send('AddTarget','AddTarget')
+}
 function Point() {
     const [form] = Form.useForm();
     const onFinish = (values) => {
@@ -43,7 +47,7 @@ function Point() {
         }),
     };
     const handleOk = () => {
-        setHasData(true)
+        setHasData(true);
         setShowModal(false);
     };
 
@@ -63,14 +67,14 @@ function Point() {
                                 <Button size="small" style={{marginRight:"5px",borderRadius:0}} icon={<DeleteOutlined/>}>
                                     删除
                                 </Button>
-                                <Button  size="small" style={{background: '#1890FF', color: "white",borderRadius:0}} icon={<PlusCircleOutlined/>}>
+                                <Button onClick={() => setShowModal(true)}  size="small" style={{background: '#1890FF', color: "white",borderRadius:0}} icon={<PlusCircleOutlined/>}>
                                     添加
                                 </Button>
                             </div>
                         </div>
                         {hasData === false ?
                             <div style={{margin: "5vh 0px"}}>
-                                <Button onClick={() => setShowModal(true)}
+                                <Button
                                         style={{background: '#1890FF', color: "white", borderRadius: 0}}>
                                     AI靶点推荐
                                 </Button>
