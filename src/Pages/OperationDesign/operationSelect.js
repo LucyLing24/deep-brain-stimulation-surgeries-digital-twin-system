@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Button, Card, Col, Row, Segmented, Table, Tabs} from "antd";
 import {MenuOutlined, WindowsOutlined} from "@ant-design/icons";
-import nopic from "../../Assets/defaultpic.jpg";
+import defaultpic1 from "../../Assets/defaultpic1.png";
 import operation_select_columns from "../Const/operation_select_columns";
 import operation_select_data from "../Const/operation_select_data";
 
@@ -65,7 +65,7 @@ function OperationSelect(props) {
                 <Card className='body-card'
                       style={{height: `calc(100vh - 168px)`, marginRight: 12, background: "#000000"}}>
                     <img
-                        src={nopic}
+                        src={defaultpic1}
                         style={{height: `calc(100vh - 200px)`}}
                     />
                 </Card>

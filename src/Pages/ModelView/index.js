@@ -16,7 +16,6 @@ import {
 } from "@ant-design/icons";
 import PageHeader from "../../Components/PageHeader";
 import patientdetial from "../../Assets/PatientInfo/patientDetail.png";
-import nopic from "../../Assets/PatientInfo/noPic.png";
 import mode0 from "../../Assets/hu/mode0.png"
 import mode1 from "../../Assets/hu/mode1.png"
 import mode2 from "../../Assets/hu/mode2.png"

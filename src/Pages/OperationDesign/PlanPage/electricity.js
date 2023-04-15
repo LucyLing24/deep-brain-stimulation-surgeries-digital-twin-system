@@ -1,24 +1,12 @@
 import React, {useState} from "react";
-import {Button, Card, Col, Form, Input, Modal, Row, Slider, Table} from "antd";
+import {Button, Card, Col, Form, Input, InputNumber, Modal, Row, Slider, Table} from "antd";
 import {DeleteOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import operation_plan_point_columns from "../../Const/operation_plan_point_columns";
 import operation_plan_point_data from "../../Const/operation_plan_point_data";
-import defaultpoint from "../../../Assets/defaultpoint.jpeg";
-import Unity, {UnityContext} from "react-unity-webgl";
 
-const unityContext4 = new UnityContext({
-    loaderUrl: "Scene4_WebGL/Build/Scene4_WebGL.asm.loader.js",
-    dataUrl: "Scene4_WebGL/Build/Scene4_WebGL.data",
-    frameworkUrl: "Scene4_WebGL/Build/Scene4_WebGL.asm.framework.js",
-    codeUrl: "Scene4_WebGL/Build/Scene4_WebGL.asm.js",
-    memoryUrl:"Scene4_WebGL/Build/Scene4_WebGL.asm.mem",
-    streamingAssetsUrl: "StreamingAssets",
-    companyName: "DefaultCompany",
-    productName: "UnityVolumeRendering",
-    productVersion: "0.1",
-});
 
-function Electricity() {
+function Electricity(props) {
+    const {handleShowElec,handleTargetElec1,handleTargetElec2,FBslider,HFslider,LRslider,FBsliderAxle,HFsliderAxle,LRsliderAxle} = props;
 
     const [form] = Form.useForm();
     const onFinish = (values) => {
@@ -36,15 +24,28 @@ function Electricity() {
     const [hasData,setHasData]=useState(false)
     const [hasName,setName]=useState(false)
     const [showModal,setShowModal]=useState(false)
+
+    const [inputValueFB, setInputValueFB] = useState(0);
+    const [inputValueHF, setInputValueHF] = useState(0);
+    const [inputValueLR, setInputValueLR] = useState(0);
+
+    const [inputValueFBAxle, setInputValueFBAxle] = useState(0);
+    const [inputValueHFAxle, setInputValueHFAxle] = useState(0);
+    const [inputValueLRAxle, setInputValueLRAxle] = useState(0);
+
     const rowSelection = {
-        onChange: () => {
-        },
-        getCheckboxProps: (record: DataType) => ({
-            disabled: record.name === 'Disabled User', // Column configuration not to be checked
-            name: record.name,
-        }),
+        type: 'radio',
+        onChange: (newSelectedRowKeys) => {
+            if (newSelectedRowKeys[0] === 0) {
+                handleTargetElec1()
+            }
+            if (newSelectedRowKeys[0] === 1) {
+                handleTargetElec2()
+            }
+        }
     };
     const handleOk = () => {
+        handleShowElec()
         setHasData(true)
         setShowModal(false);
     };
@@ -53,9 +54,32 @@ function Electricity() {
         setShowModal(false);
     };
 
+    const onChangeFB = (newValue) => {
+        setInputValueFB(newValue);
+        FBslider(newValue);
+    };
+    const onChangeHF = (newValue) => {
+        setInputValueHF(newValue);
+        HFslider(newValue);
+    };
+    const onChangeLR = (newValue) => {
+        setInputValueLR(newValue);
+        LRslider(newValue);
+    };
+    const onChangeFBAxle = (newValue) => {
+        setInputValueFBAxle(newValue);
+        FBsliderAxle(newValue);
+    };
+    const onChangeHFAxle = (newValue) => {
+        setInputValueHFAxle(newValue);
+        HFsliderAxle(newValue);
+    };
+    const onChangeLRAxle = (newValue) => {
+        setInputValueLRAxle(newValue);
+        LRsliderAxle(newValue);
+    };
+
     return (
-        <Row gutter={12}>
-            <Col span={6}>
                 <Card className='body-card'
                       style={{height: `calc(100vh - 226px)`, overflowY: "scroll"}}>
 
@@ -85,7 +109,7 @@ function Electricity() {
                                     pagination={false}
                                     size="small"
                                     columns={operation_plan_point_columns}
-                                    dataSource={operation_plan_point_data}
+                                    dataSource={operation_plan_point_data[2]}
                                     rowSelection={rowSelection}
                                     scroll={{y: "20vh"}}
                                 />
@@ -96,29 +120,66 @@ function Electricity() {
                             电极通路详情
                         </div>
                         <div>
-                            <div className="construct-window">
-                                靶点名称
-                                <Input style={{marginLeft: "30px", width: "70%"}} disabled/>
-                            </div>
-                            <div className="construct-window" style={{marginTop: 10}}>
-                                穿过结构
-                                <Input style={{marginLeft: "30px", width: "70%"}} disabled/>
-                            </div>
-                            <div>
+                            <div style={{marginTop:10}}>
                                 <div className="construct-window" style={{color: "#1890ff"}}>
-                                    目标靶点
+                                    目标电极位置
                                 </div>
                                 <div className="construct-window">
                                     FB坐标(mm)
-                                    <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                    <Slider
+                                        min={-0.3}
+                                        max={0.1}
+                                        onChange={onChangeFB}
+                                        value={typeof inputValueFB === 'number' ? inputValueFB : 0}
+                                        step={0.01}
+                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                    />
+                                    <InputNumber
+                                        min={-0.3}
+                                        max={0.1}
+                                        style={{ margin: '0 12px' }}
+                                        step={0.01}
+                                        value={inputValueFB}
+                                        onChange={onChangeFB}
+                                    />
                                 </div>
                                 <div className="construct-window">
                                     HF坐标(mm)
-                                    <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                    <Slider
+                                        min={-0.2}
+                                        max={0.2}
+                                        onChange={onChangeHF}
+                                        value={typeof inputValueHF === 'number' ? inputValueHF : 0}
+                                        step={0.01}
+                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                    />
+                                    <InputNumber
+                                        min={-0.2}
+                                        max={0.2}
+                                        style={{ margin: '0 12px' }}
+                                        step={0.01}
+                                        value={inputValueHF}
+                                        onChange={onChangeHF}
+                                    />
                                 </div>
                                 <div className="construct-window">
                                     LR坐标(mm)
-                                    <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                    <Slider
+                                        min={-0.2}
+                                        max={0.2}
+                                        onChange={onChangeLR}
+                                        value={typeof inputValueLR === 'number' ? inputValueLR : 0}
+                                        step={0.01}
+                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                    />
+                                    <InputNumber
+                                        min={-0.2}
+                                        max={0.2}
+                                        style={{ margin: '0 12px' }}
+                                        step={0.01}
+                                        value={inputValueLR}
+                                        onChange={onChangeLR}
+                                    />
                                 </div>
                             </div>
 
@@ -128,18 +189,64 @@ function Electricity() {
                                 </div>
                                 <div className="construct-window">
                                     FB轴(度)
-                                    <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                    <Slider
+                                        min={-90}
+                                        max={90}
+                                        onChange={onChangeFBAxle}
+                                        value={typeof inputValueFBAxle === 'number' ? inputValueFBAxle : 0}
+                                        step={1}
+                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                    />
+                                    <InputNumber
+                                        min={-90}
+                                        max={90}
+                                        style={{ margin: '0 12px' }}
+                                        step={1}
+                                        value={inputValueFBAxle}
+                                        onChange={onChangeFBAxle}
+                                    />
                                 </div>
                                 <div className="construct-window">
                                     HF轴(度)
-                                    <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                    <Slider
+                                        min={-90}
+                                        max={90}
+                                        onChange={onChangeHFAxle}
+                                        value={typeof inputValueHFAxle === 'number' ? inputValueHFAxle : 0}
+                                        step={1}
+                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                    />
+                                    <InputNumber
+                                        min={-90}
+                                        max={90}
+                                        style={{ margin: '0 12px' }}
+                                        step={1}
+                                        value={inputValueHFAxle}
+                                        onChange={onChangeHFAxle}
+                                    />
                                 </div>
                                 <div className="construct-window">
                                     LR轴(度)
-                                    <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                    <Slider
+                                        min={-90}
+                                        max={90}
+                                        onChange={onChangeLRAxle}
+                                        value={typeof inputValueLRAxle === 'number' ? inputValueLRAxle : 0}
+                                        step={1}
+                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                    />
+                                    <InputNumber
+                                        min={-90}
+                                        max={90}
+                                        style={{ margin: '0 12px' }}
+                                        step={1}
+                                        value={inputValueLRAxle}
+                                        onChange={onChangeLRAxle}
+                                    />
                                 </div>
                             </div>
                         </div>
+
                         <Modal title="添加推荐AI靶点" open={showModal} onOk={handleOk} onCancel={handleCancel}>
                             <br/>
                             <Form
@@ -185,11 +292,6 @@ function Electricity() {
                         </Modal>
                     </div>
                 </Card>
-            </Col>
-            <Col span={18}>
-                <Unity style={{'width': '99%', height: `calc(100vh - 226px)`}} unityContext={unityContext4}/>
-            </Col>
-        </Row>
     )
 }
 

@@ -3,35 +3,27 @@ import {Button, Card, Col, Row, Table, Tabs, Typography} from "antd";
 import operation_plan_vessel_columns from "../../Const/operation_plan_vessel_columns";
 import operation_plan_vessel_data from "../../Const/operation_plan_vessel_data";
 import Search from "antd/es/input/Search";
-import Unity, {UnityContext} from "react-unity-webgl";
 
-const unityContext3 = new UnityContext({
-    loaderUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.loader.js",
-    dataUrl: "Scene3_WebGL/Build/Scene3_WebGL.data",
-    frameworkUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.framework.js",
-    codeUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.js",
-    memoryUrl:"Scene3_WebGL/Build/Scene3_WebGL.asm.mem",
-    streamingAssetsUrl: "StreamingAssets",
-    companyName: "DefaultCompany",
-    productName: "UnityVolumeRendering",
-    productVersion: "0.1",
-});
-function Vessel() {
 
+function Vessel(props) {
+    const {handleShow2,handleShow1,handleShow3}=props;
 
     const [hasdata,setHasdata]=useState(false)
     const rowSelection = {
-        onChange: () => {
-        },
-        getCheckboxProps: (record: DataType) => ({
-            disabled: record.name === 'Disabled User', // Column configuration not to be checked
-            name: record.name,
-        }),
+        onChange: (newSelectedRowKeys)=>{
+            if(newSelectedRowKeys.length===1){
+                handleShow2();
+            }
+            if(newSelectedRowKeys.length===2){
+                handleShow1();
+            }
+            if(newSelectedRowKeys.length>2){
+                handleShow3();
+            }
+        }
     };
 
     return (
-        <Row gutter={12}>
-            <Col span={6}>
                 <Card className='body-card'
                       style={{height: `calc(100vh - 226px)`, overflowY: "scroll"}}>
                     <div>
@@ -60,11 +52,6 @@ function Vessel() {
                         }
                     </div>
                 </Card>
-            </Col>
-            <Col span={18}>
-                <Unity style={{'width': '99%', height: `calc(100vh - 226px)`}} unityContext={unityContext3}/>
-            </Col>
-        </Row>
     )
 }
 

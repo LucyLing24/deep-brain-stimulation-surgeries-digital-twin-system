@@ -1,27 +1,15 @@
 import React, {useState} from "react";
-import {Button, Card, Col, Form, Input, Modal, Row, Slider, Table, Tabs} from "antd";
+import {Button, Card, Col, Form, Input, InputNumber, Modal, Row, Slider, Table, Tabs} from "antd";
 import operation_plan_point_columns from "../../Const/operation_plan_point_columns";
 import operation_plan_point_data from "../../Const/operation_plan_point_data";
 import {DeleteOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import defaultpoint from "../../../Assets/defaultpoint.jpeg"
-import Unity, {UnityContext} from "react-unity-webgl";
+import target1 from "../../../Assets/plan/target1.jpeg"
+import target2 from "../../../Assets/plan/target2.jpeg"
 
-const unityContext4 = new UnityContext({
-    loaderUrl: "Scene4_WebGL/Build/Scene4_WebGL.asm.loader.js",
-    dataUrl: "Scene4_WebGL/Build/Scene4_WebGL.data",
-    frameworkUrl: "Scene4_WebGL/Build/Scene4_WebGL.asm.framework.js",
-    codeUrl: "Scene4_WebGL/Build/Scene4_WebGL.asm.js",
-    memoryUrl:"Scene4_WebGL/Build/Scene4_WebGL.asm.mem",
-    streamingAssetsUrl: "StreamingAssets",
-    companyName: "DefaultCompany",
-    productName: "UnityVolumeRendering",
-    productVersion: "0.1",
-});
 
-function handleAdd() {
-    unityContext4.send('AddTarget','AddTarget')
-}
-function Point() {
+function Point(props) {
+    const {handleAdd, handleTarget1, handleTarget2,FBslider,HFslider,LRslider} = props
     const [form] = Form.useForm();
     const onFinish = (values) => {
         window.location.replace('menu')
@@ -35,11 +23,26 @@ function Point() {
         100: '200',
     };
 
-    const [hasData,setHasData]=useState(false)
+    const [hasData,setHasData]=useState(0)
     const [hasName,setName]=useState(false)
-    const [showModal,setShowModal]=useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const [selectTarget,setSelectTarget]=useState(0)
+    const [inputValueFB, setInputValueFB] = useState(0);
+    const [inputValueHF, setInputValueHF] = useState(0);
+    const [inputValueLR, setInputValueLR] = useState(0);
+
     const rowSelection = {
-        onChange: () => {
+        type: 'radio',
+        onChange: (newSelectedRowKeys) => {
+            if (newSelectedRowKeys[0] === 0) {
+                setSelectTarget(1)
+                handleTarget1();
+            }
+            if (newSelectedRowKeys[0] === 1) {
+                setSelectTarget(2)
+                handleTarget2();
+            }
+
         },
         getCheckboxProps: (record: DataType) => ({
             disabled: record.name === 'Disabled User', // Column configuration not to be checked
@@ -47,17 +50,30 @@ function Point() {
         }),
     };
     const handleOk = () => {
-        setHasData(true);
+        setHasData(hasData+1);
+        handleAdd();
         setShowModal(false);
     };
 
     const handleCancel = () => {
+        setHasData(hasData-1);
         setShowModal(false);
     };
 
+    const onChangeFB = (newValue) => {
+        setInputValueFB(newValue);
+        FBslider(newValue);
+    };
+    const onChangeHF = (newValue) => {
+        setInputValueHF(newValue);
+        HFslider(newValue);
+    };
+    const onChangeLR = (newValue) => {
+        setInputValueLR(newValue);
+        LRslider(newValue);
+    };
+
     return (
-        <Row gutter={12}>
-            <Col span={6}>
                 <Card className='body-card'
                       style={{height: `calc(100vh - 226px)`, overflowY: "scroll"}}>
                     <div>
@@ -72,45 +88,96 @@ function Point() {
                                 </Button>
                             </div>
                         </div>
-                        {hasData === false ?
-                            <div style={{margin: "5vh 0px"}}>
-                                <Button
-                                        style={{background: '#1890FF', color: "white", borderRadius: 0}}>
-                                    AI靶点推荐
-                                </Button>
+                        {hasData === 0 ?
+                            <div>
+                                <Table
+                                    pagination={false}
+                                    size="small"
+                                    columns={operation_plan_point_columns}
+                                    dataSource={[]}
+                                    rowSelection={rowSelection}
+                                    scroll={{y: "20vh"}}
+                                />
                             </div> :
                             <div>
                                 <Table
                                     pagination={false}
                                     size="small"
                                     columns={operation_plan_point_columns}
-                                    dataSource={operation_plan_point_data}
+                                    dataSource={operation_plan_point_data[hasData]}
                                     rowSelection={rowSelection}
                                     scroll={{y: "20vh"}}
                                 />
                             </div>
                         }
-                        <div className="datalist-side-title" style={{fontSize:16,fontWeight:"bold",gap:"66px",marginTop:"2vh"}}>
+                        <div className="datalist-side-title" style={{fontSize:16,fontWeight:"bold",gap:"66px",marginTop:"2vh",marginBottom:10}}>
                             靶点详情
                         </div>
                         <div>
                             <div className="construct-window">
-                                靶点名称
-                                <Input style={{marginLeft: "30px", width: "70%"}} disabled/>
-                            </div>
-                            <div className="construct-window">
                                 FB坐标(mm)
-                                <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                <Slider
+                                    min={-0.3}
+                                    max={0.1}
+                                    onChange={onChangeFB}
+                                    value={typeof inputValueFB === 'number' ? inputValueFB : 0}
+                                    step={0.01}
+                                    defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                />
+                                <InputNumber
+                                    min={-0.3}
+                                    max={0.1}
+                                    style={{ margin: '0 12px' }}
+                                    step={0.01}
+                                    value={inputValueFB}
+                                    onChange={onChangeFB}
+                                />
                             </div>
                             <div className="construct-window">
                                 HF坐标(mm)
-                                <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                <Slider
+                                    min={-0.2}
+                                    max={0.2}
+                                    onChange={onChangeHF}
+                                    value={typeof inputValueHF === 'number' ? inputValueHF : 0}
+                                    step={0.01}
+                                    defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                />
+                                <InputNumber
+                                    min={-0.2}
+                                    max={0.2}
+                                    style={{ margin: '0 12px' }}
+                                    step={0.01}
+                                    value={inputValueHF}
+                                    onChange={onChangeHF}
+                                />
                             </div>
-                            <div className="construct-window">
+                            <div className="construct-window" style={{marginBottom:15}}>
                                 LR坐标(mm)
-                                <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                <Slider
+                                    min={-0.2}
+                                    max={0.2}
+                                    onChange={onChangeLR}
+                                    value={typeof inputValueLR === 'number' ? inputValueLR : 0}
+                                    step={0.01}
+                                    defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                />
+                                <InputNumber
+                                    min={-0.2}
+                                    max={0.2}
+                                    style={{ margin: '0 12px' }}
+                                    step={0.01}
+                                    value={inputValueLR}
+                                    onChange={onChangeLR}
+                                />
                             </div>
-                            <img src={defaultpoint} style={{width:"100%"}}/>
+                            {
+                                selectTarget === 0 ? <img src={defaultpoint} style={{width: "100%"}}/> :
+                                    selectTarget === 1 ? <img src={target1} style={{width: "100%"}}/> :
+                                        <img src={target2} style={{width: "100%"}}/>
+
+                            }
+
                         </div>
                         <Modal title="添加推荐AI靶点" open={showModal} onOk={handleOk} onCancel={handleCancel}>
                             <br />
@@ -128,26 +195,21 @@ function Point() {
                                 <Form.Item disabled={!hasName}  label={"靶点坐标"}>
                                     <div className="construct-window">
                                         FB坐标(mm)
-                                        <Slider step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                        <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
                                     </div>
                                     <div className="construct-window">
                                         HF坐标(mm)
-                                        <Slider step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                        <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
                                     </div>
                                     <div className="construct-window">
                                         LR坐标(mm)
-                                        <Slider step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
+                                        <Slider marks={marks} step={10} defaultValue={25} style={{marginLeft: "30px", width: "60%"}}/>
                                     </div>
                                 </Form.Item>
                             </Form>
                         </Modal>
                     </div>
                 </Card>
-            </Col>
-            <Col span={18}>
-                <Unity style={{'width': '99%', height: `calc(100vh - 226px)`}} unityContext={unityContext4}/>
-            </Col>
-        </Row>
 
     )
 }

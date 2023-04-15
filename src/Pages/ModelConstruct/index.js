@@ -25,7 +25,7 @@ import React, {useState} from "react";
 import patientdetial from "../../Assets/PatientInfo/patientDetail.png";
 import defaultpic0 from "../../Assets/PatientInfo/defaultpic0.png";
 import defaultpic1 from "../../Assets/PatientInfo/defaultpic1.png";
-import defaultpic2 from "../../Assets/defaultpic.jpg";
+import defaultpic2 from "../../Assets/defaultpic1.png";
 import TextArea from "antd/es/input/TextArea";
 import Unity, {UnityContext} from "react-unity-webgl";
 
@@ -284,7 +284,7 @@ function ModelConstruct() {
                         </div>
                         <div className="construct-window" style={{marginTop:"10px"}}>
                             位置(mm)
-                            <Slider defaultValue={30} style={{marginLeft:"10px",width:"75%"}} />
+                            <Slider defaultValue={30} style={{marginLeft:"10px",width:"70%"}} />
                         </div>
                         {
                             pic===0?<img

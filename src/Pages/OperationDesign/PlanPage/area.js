@@ -5,30 +5,9 @@ import operation_plan_area_columns from "../../Const/operation_plan_area_columns
 import tips from "../../../Assets/tips.jpeg"
 import tips1 from "../../../Assets/tips1.jpeg"
 import Search from "antd/es/input/Search";
-import Unity, {UnityContext} from "react-unity-webgl";
 
-const unityContext3 = new UnityContext({
-    loaderUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.loader.js",
-    dataUrl: "Scene3_WebGL/Build/Scene3_WebGL.data",
-    frameworkUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.framework.js",
-    codeUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.js",
-    memoryUrl:"Scene3_WebGL/Build/Scene3_WebGL.asm.mem",
-    streamingAssetsUrl: "StreamingAssets",
-    companyName: "DefaultCompany",
-    productName: "UnityVolumeRendering",
-    productVersion: "0.1",
-});
-
-function handleEdit(data){
-    unityContext3.send("Main Camera", "Change_Center_WebGL", data);
-    unityContext3.send(data, "ChangeSpeed");
-}
-function handleSave(data){
-    unityContext3.send(data, "SaveMesh");
-}
-
-
-function Area() {
+function Area(props) {
+    const {handleEdit, handleSave,handleTransform}=props;
 
     const [selectedRowKeys,setSelectedRowKeys]=useState([]);
     const [showModal,setShowModal]=useState(false);
@@ -36,8 +15,8 @@ function Area() {
     const [inputValue0, setInputValue0] = useState(0.008);
     const [inputValue1, setInputValue1] = useState(0.08);
 
-    function handleTransform(){
-        unityContext3.send('WhichNucleusBrush','TransformNucleus');
+    function handleTransformClick(){
+        handleTransform();
         setShowModal(false);
     }
     const handleOk = () => {
@@ -128,8 +107,6 @@ function Area() {
     ]
 
     return (
-        <Row gutter={12}>
-            <Col span={6}>
                 <Card className='body-card'
                       style={{height: `calc(100vh - 226px)`,  overflowY: "scroll"}}>
 
@@ -165,7 +142,7 @@ function Area() {
                         </div>
                         <Modal title="手动调整" open={showModal} onOk={handleOk} onCancel={handleCancel}
                                footer={[
-                                   <Button  onClick={handleTransform} style={{background: "#52c41a", color: "white"}}>
+                                   <Button  onClick={handleTransformClick} style={{background: "#52c41a", color: "white"}}>
                                        调整位置
                                    </Button>,
                                    <Button key="submit" type="primary" onClick={handleOk}>
@@ -179,11 +156,6 @@ function Area() {
                         </Modal>
                     </div>
                 </Card>
-            </Col>
-            <Col span={18}>
-                <Unity style={{'width': '99%', height: `calc(100vh - 226px)`,}} unityContext={unityContext3}/>
-            </Col>
-        </Row>
     )
 }
 
