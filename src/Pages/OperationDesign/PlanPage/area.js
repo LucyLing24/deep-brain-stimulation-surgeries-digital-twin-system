@@ -7,7 +7,7 @@ import tips1 from "../../../Assets/tips1.jpeg"
 import Search from "antd/es/input/Search";
 
 function Area(props) {
-    const {handleEdit, handleSave,handleTransform}=props;
+    const {handleEdit, handleSave,handleTransform,handleBrushSize,handleBrushStrength}=props;
 
     const [selectedRowKeys,setSelectedRowKeys]=useState([]);
     const [showModal,setShowModal]=useState(false);
@@ -40,11 +40,11 @@ function Area(props) {
 
     const onChange0 = (newValue) => {
         setInputValue0(newValue);
-        unityContext3.send('WhichNucleusBrush', 'SetSize', newValue);
+        handleBrushSize(newValue);
     };
     const onChange1 = (newValue) => {
         setInputValue1(newValue);
-        unityContext3.send('WhichNucleus','BrushSetStrength',newValue);
+        handleBrushStrength(newValue)
     };
 
     const nucleusOptions={

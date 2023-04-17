@@ -38,9 +38,16 @@ function handleEditArea(data){
 function handleSaveArea(data){
     unityContext3.send(data, "SaveMesh");
 }
+function handleBrushSizeArea(data){
+    unityContext3.send('WhichNucleusBrush', 'SetSize', data);
+}
+function handleBrushStrengthArea(data){
+    unityContext3.send('WhichNucleus','BrushSetStrength',data);
+}
 function handleTransformArea(){
     unityContext3.send('WhichNucleusBrush','TransformNucleus');
 }
+
 
 // scene3 血管
 function handleShowVessel2(){
@@ -107,7 +114,9 @@ const createtab=[
     {
         key: 0,
         label: "核团标注",
-        children: <Area handleEdit={handleEditArea} handleSave={handleSaveArea} handleTransform={handleTransformArea}/>,
+        children: <Area handleEdit={handleEditArea} handleSave={handleSaveArea} handleTransform={handleTransformArea}
+                        handleBrushSize={handleBrushSizeArea} handleBrushStrength={handleBrushStrengthArea}
+        />,
     },
     {
         key: 1,
