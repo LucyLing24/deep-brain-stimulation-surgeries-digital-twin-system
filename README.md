@@ -1,4 +1,4 @@
-# Surgical Treatment Digital Twin System
+# Deep Brain Stimulation Surgeries Digital-twin System
 
 Digital-twin System Enabled Deep Brain Stimulation Surgeries.} Implemented the system, including modeling the brain nuclei with Unity, embedding the React web page with Webgl, and achieving bidirectional communication between React and Webgl.
 
