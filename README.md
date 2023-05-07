@@ -12,6 +12,8 @@ Digital-twin System Enabled Deep Brain Stimulation Surgeries.} Implemented the s
 <img width="1024" alt="image" src="https://user-images.githubusercontent.com/56916034/236578308-4c16a529-6355-4049-9910-eaeb29f64c51.png">
 <img width="1027" alt="image" src="https://user-images.githubusercontent.com/56916034/236578324-cc753c14-6048-4f5e-8d46-987f8f95e808.png">
 <img width="1022" alt="image" src="https://user-images.githubusercontent.com/56916034/236578779-2d95166f-de01-4363-ad06-397ccd31103f.png">
+<img width="1454" alt="image" src="https://user-images.githubusercontent.com/56916034/236676749-6ea29c21-861d-474c-9355-3ce69aef8e88.png">
+
 
 
 ## UI Design
