@@ -153,7 +153,7 @@ function DataList() {
             {mode==='list'?
             <Row>
                 <Col span={20}>
-                    <Card style={{margin: "10px", height: `calc(100vh - 108px)`, borderRadius: 0}}>
+                    <Card style={{margin: "10px", height: `calc(100vh - 108px)`, borderRadius: 0,textAlign: "left"}}>
                         <div className="datalist-side-title">
                             全部患者
                             <Tag icon={<ExclamationCircleOutlined/>} color="warning">
@@ -171,19 +171,19 @@ function DataList() {
                         <br/>
                         <div>
                             <Row  style={{display:"flex",
-                                flexDirection: "row"}}>
+                                flexDirection: "row"}} gutter={20}>
                                 <Col span={0.5}>
                                     <FilterFilled style={{color:"#1890FF",fontSize:"24px"}}/>
                                 </Col>
-                                <Col span={5} >
+                                <Col span={4.5} >
                                     科室{"\t"}
                                     <Cascader size={"small"} options={options} onChange={onChange} placeholder="选择科室" />
                                 </Col>
-                                <Col span={5}>
+                                <Col span={5.5}>
                                     治疗阶段{"\t"}
                                     <Cascader size={"small"} options={options} onChange={onChange} placeholder="患者治理阶段" />
                                 </Col>
-                                <Col span={7}>
+                                <Col span={6.5}>
                                     时间段{"\t"}
                                     <RangePicker size={"small"}/>
                                 </Col>
@@ -193,10 +193,10 @@ function DataList() {
                                 </Col>
                             </Row>
                         </div><br/>
-                        <Row gutter={[24, 24]}>
+                        <Row gutter={[12, 48]} style={{overflowY:"scroll"}}>
                             {_.map(data, (item, index) => {
                                 return (
-                                    <Col span={4.5}>
+                                    <Col span={6}>
                                         <Card
                                             className="datalist-card"
                                               style={{cursor: "pointer"}}
@@ -205,7 +205,7 @@ function DataList() {
                                             <img
                                                 src={item.pic}
                                                 alt="logo"
-                                                style={{width: '170px',height:"200px"}}
+                                                style={{width: '230px',height:"270px"}}
                                                 onClick={()=>{setMode('detail')}}
                                             />
                                             <div className="datalist-card-button">
@@ -238,7 +238,7 @@ function DataList() {
                 <>
                     <img src={d3} style={{width:"100%"}}/>
                 <Card style={{marginLeft: "12px",marginRight: "12px", height: `calc(100vh - 168px)`, borderRadius: 0,overflowY:"scroll"}}>
-                    <Button onClick={()=>{setMode('list')}} type={"primary"} style={{marginBottom:10,float:"left",borderRadius:0}}>返回全部患者</Button>
+                    <Button onClick={()=>{setMode('list')}} type={"primary"} style={{marginLeft:12,marginBottom:10,float:"left",borderRadius:0}}>返回全部患者</Button>
                     <img src={d1} style={{width:"100%"}}/>
                     <img src={d2} style={{width:"100%"}}/>
                 </Card> </>

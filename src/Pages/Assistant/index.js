@@ -15,7 +15,7 @@ import patientdetial from "../../Assets/PatientInfo/patientDetail.png";
 import tab2 from "../../Assets/assistant/tab2.png";
 import tab3 from "../../Assets/assistant/tab3.png";
 import tab4 from "../../Assets/assistant/tab4.png";
-import info from "../../Assets/assistant/info.png"
+import info from "../../Assets/assistant/info.jpeg"
 import Unity, {UnityContext} from "react-unity-webgl";
 import assistant_data from "../Const/assistant_data";
 import assistant_columns from "../Const/assistant_columns";
@@ -23,11 +23,11 @@ import assistant_columns from "../Const/assistant_columns";
 
 
 const unityContext5 = new UnityContext({
-    loaderUrl: "Scene5_WebGL/Build/Scene5_WebGL.asm.loader.js",
-    dataUrl: "Scene5_WebGL/Build/Scene5_WebGL.data",
-    frameworkUrl: "Scene5_WebGL/Build/Scene5_WebGL.asm.framework.js",
-    codeUrl: "Scene5_WebGL/Build/Scene5_WebGL.asm.js",
-    memoryUrl:"Scene5_WebGL/Build/Scene5_WebGL.asm.mem",
+    loaderUrl: "Scene5/Build/Scene5.asm.loader.js",
+    dataUrl: "Scene5/Build/Scene5.data",
+    frameworkUrl: "Scene5/Build/Scene5.asm.framework.js",
+    codeUrl: "Scene5/Build/Scene5.asm.js",
+    memoryUrl:"Scene5/Build/Scene5.asm.mem",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "DefaultCompany",
     productName: "UnityVolumeRendering",
@@ -126,13 +126,17 @@ function Assistant() {
             />
             {view === 0 ?
                 <div style={{marginLeft:12,marginRight:12,height:`calc( 100vh - 168px )`,overflowY:"scroll"}}>
-                <img
-                    src={info}
-                    style={{width:"100%"}}
-                    onClick={() => {
-                        setView(1)
-                    }}
-                /></div> :
+                    <div style={{padding:12,background:"white"}}>
+                        <img
+                            src={info}
+                            style={{width:"100%"}}
+                            onClick={() => {
+                                setView(1)
+                            }}
+                        />
+
+                    </div>
+                </div> :
                 <div>
                     <div style={{
                         display: 'flex',

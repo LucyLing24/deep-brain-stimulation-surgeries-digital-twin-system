@@ -7,11 +7,11 @@ import Electricity from "./PlanPage/electricity";
 import Unity, {UnityContext} from "react-unity-webgl";
 
 const unityContext3 = new UnityContext({
-    loaderUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.loader.js",
-    dataUrl: "Scene3_WebGL/Build/Scene3_WebGL.data",
-    frameworkUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.framework.js",
-    codeUrl: "Scene3_WebGL/Build/Scene3_WebGL.asm.js",
-    memoryUrl:"Scene3_WebGL/Build/Scene3_WebGL.asm.mem",
+    loaderUrl: "Scene3/Build/Scene3.asm.loader.js",
+    dataUrl: "Scene3/Build/Scene3.data",
+    frameworkUrl: "Scene3/Build/Scene3.asm.framework.js",
+    codeUrl: "Scene3/Build/Scene3.asm.js",
+    memoryUrl:"Scene3/Build/Scene3.asm.mem",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "DefaultCompany",
     productName: "UnityVolumeRendering",
@@ -19,11 +19,11 @@ const unityContext3 = new UnityContext({
 });
 
 const unityContext4 = new UnityContext({
-    loaderUrl: "Scene4_WebGL/Build/Scene4_WebGL.asm.loader.js",
-    dataUrl: "Scene4_WebGL/Build/Scene4_WebGL.data",
-    frameworkUrl: "Scene4_WebGL/Build/Scene4_WebGL.asm.framework.js",
-    codeUrl: "Scene4_WebGL/Build/Scene4_WebGL.asm.js",
-    memoryUrl:"Scene4_WebGL/Build/Scene4_WebGL.asm.mem",
+    loaderUrl: "Scene4/Build/Scene4.asm.loader.js",
+    dataUrl: "Scene4/Build/Scene4.data",
+    frameworkUrl: "Scene4/Build/Scene4.asm.framework.js",
+    codeUrl: "Scene4/Build/Scene4.asm.js",
+    memoryUrl:"Scene4/Build/Scene4.asm.mem",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "DefaultCompany",
     productName: "UnityVolumeRendering",
@@ -160,7 +160,7 @@ function OperationPlan() {
         <div style={{ width: "100%",float:"right"}}>
             <Row gutter={10}>
                 <Col span={6}>
-                    <Tabs style={{height: "100%", marginLeft: 12}} defaultActiveKey={0}
+                    <Tabs style={{ marginLeft: 12}} defaultActiveKey={0}
                           type="card"
                           items={createtab}
                           onChange={onChange}

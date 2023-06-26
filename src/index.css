@@ -376,3 +376,8 @@ background-color: transparent;
  border-Radius: 0;
   border:none;
 }
+
+
+:where(.css-dev-only-do-not-override-k83k30).ant-tabs-top >.ant-tabs-nav{
+  margin: 0!important;
+}

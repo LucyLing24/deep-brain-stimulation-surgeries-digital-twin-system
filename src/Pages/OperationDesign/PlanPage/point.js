@@ -75,9 +75,9 @@ function Point(props) {
 
     return (
                 <Card className='body-card'
-                      style={{height: `calc(100vh - 226px)`, overflowY: "scroll"}}>
+                      style={{height: `calc(100vh - 208px)`, overflowY: "scroll"}}>
                     <div>
-                        <div className="datalist-side-title" style={{fontSize:16,fontWeight:"bold",gap:"66px",marginBottom:10}}>
+                        <div className="datalist-side-title" style={{fontSize:16,fontWeight:"bold",gap:"66px",marginBottom:10,justifyContent:"space-between"}}>
                             DBS靶点列表
                             <div>
                                 <Button size="small" style={{marginRight:"5px",borderRadius:0}} icon={<DeleteOutlined/>}>
@@ -113,8 +113,8 @@ function Point(props) {
                         <div className="datalist-side-title" style={{fontSize:16,fontWeight:"bold",gap:"66px",marginTop:"2vh",marginBottom:10}}>
                             靶点详情
                         </div>
-                        <div>
-                            <div className="construct-window">
+                        <div style={{justifyContent:"space-between",textAlign:"left"}}>
+                            <div className="construct-window" style={{justifyContent:"space-between",textAlign:"left"}}>
                                 FB坐标(mm)
                                 <Slider
                                     min={-0.3}
@@ -122,18 +122,17 @@ function Point(props) {
                                     onChange={onChangeFB}
                                     value={typeof inputValueFB === 'number' ? inputValueFB : 0}
                                     step={0.01}
-                                    defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                    defaultValue={0} style={{marginLeft: "10px", width: "34%"}}
                                 />
                                 <InputNumber
                                     min={-0.3}
                                     max={0.1}
-                                    style={{ margin: '0 12px' }}
                                     step={0.01}
                                     value={inputValueFB}
                                     onChange={onChangeFB}
                                 />
                             </div>
-                            <div className="construct-window">
+                            <div className="construct-window" style={{justifyContent:"space-between"}}>
                                 HF坐标(mm)
                                 <Slider
                                     min={-0.2}
@@ -141,18 +140,17 @@ function Point(props) {
                                     onChange={onChangeHF}
                                     value={typeof inputValueHF === 'number' ? inputValueHF : 0}
                                     step={0.01}
-                                    defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                    defaultValue={0} style={{marginLeft: "10px", width: "34%"}}
                                 />
                                 <InputNumber
                                     min={-0.2}
                                     max={0.2}
-                                    style={{ margin: '0 12px' }}
                                     step={0.01}
                                     value={inputValueHF}
                                     onChange={onChangeHF}
                                 />
                             </div>
-                            <div className="construct-window" style={{marginBottom:15}}>
+                            <div className="construct-window" style={{marginBottom:15}} style={{justifyContent:"space-between"}}>
                                 LR坐标(mm)
                                 <Slider
                                     min={-0.2}
@@ -160,17 +158,17 @@ function Point(props) {
                                     onChange={onChangeLR}
                                     value={typeof inputValueLR === 'number' ? inputValueLR : 0}
                                     step={0.01}
-                                    defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                    defaultValue={0} style={{marginLeft: "10px", width: "34%"}}
                                 />
                                 <InputNumber
                                     min={-0.2}
                                     max={0.2}
-                                    style={{ margin: '0 12px' }}
                                     step={0.01}
                                     value={inputValueLR}
                                     onChange={onChangeLR}
                                 />
                             </div>
+                            <br />
                             {
                                 selectTarget === 0 ? <img src={defaultpoint} style={{width: "100%"}}/> :
                                     selectTarget === 1 ? <img src={target1} style={{width: "100%"}}/> :

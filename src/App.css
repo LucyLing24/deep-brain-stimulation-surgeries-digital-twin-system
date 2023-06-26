@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100% !important;
 }
 
 .App-logo {
@@ -35,4 +39,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#root {
+  height: 100% !important;
+  margin: 0;
+  padding: 0;
 }

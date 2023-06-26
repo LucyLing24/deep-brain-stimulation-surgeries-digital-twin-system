@@ -30,11 +30,11 @@ import TextArea from "antd/es/input/TextArea";
 import Unity, {UnityContext} from "react-unity-webgl";
 
 const unityContext = new UnityContext({
-    loaderUrl: "Scene1_WebGL/Build/Scene1_WebGL.asm.loader.js",
-    dataUrl: "Scene1_WebGL/Build/Scene1_WebGL.data",
-    frameworkUrl: "Scene1_WebGL/Build/Scene1_WebGL.asm.framework.js",
-    codeUrl: "Scene1_WebGL/Build/Scene1_WebGL.asm.js",
-    memoryUrl:"Scene1_WebGL/Build/Scene1_WebGL.asm.mem",
+    loaderUrl: "Scene1/Build/Scene1.asm.loader.js",
+    dataUrl: "Scene1/Build/Scene1.data",
+    frameworkUrl: "Scene1/Build/Scene1.asm.framework.js",
+    codeUrl: "Scene1/Build/Scene1.asm.js",
+    memoryUrl:"Scene1/Build/Scene1.asm.mem",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "DefaultCompany",
     productName: "UnityVolumeRendering",
@@ -236,9 +236,9 @@ function ModelConstruct() {
             <Row gutter={12}>
                 <Col span={6}>
                     <Card style={{height: `calc(100vh - 168px)`, borderRadius: 0, marginLeft: "12px",overflowY:"scroll"}}>
-                        <div className="datalist-side-title" style={{gap:"36px"}}>
+                        <div className="datalist-side-title" style={{gap: "27px",justifyContent:"space-between"}}>
                             医疗影像数据库
-                            <div>
+                            <div style={{textAlign:"right"}}>
                                 <Button size="small" style={{marginRight:"5px"}} icon={<DeleteOutlined/>}>
                                     删除
                                 </Button>
@@ -250,17 +250,17 @@ function ModelConstruct() {
                         <br/>
                         <div>
                             <Row  style={{display:"flex",
-                                flexDirection: "row"}}>
+                                flexDirection: "row",justifyContent:'space-between'}}>
                                 <Col span={2}>
                                     <FilterFilled style={{color:"#1890FF",fontSize:"24px"}}/>
                                 </Col>
                                 <Col span={11} >
                                     类型{"\t"}
-                                    <Cascader size="small" style={{width:"94px"}} placeholder="选择类型" />
+                                    <Cascader size="small" style={{width:"106px"}} placeholder="选择类型" />
                                 </Col>
                                 <Col span={11}>
                                     阶段{"\t"}
-                                    <Cascader size="small" style={{width:"94px"}}  placeholder="患者治理阶段" />
+                                    <Cascader size="small" style={{width:"106px"}}  placeholder="患者治理阶段" />
                                 </Col>
                             </Row>
                         </div><br/>
@@ -278,21 +278,21 @@ function ModelConstruct() {
                         <div className="datalist-side-title" style={{gap: "10px"}}>
                             影像预览窗口
                         </div>
-                        <div className="construct-window" style={{marginTop:"10px"}}>
+                        <div className="construct-window" style={{marginTop:"10px",justifyContent:"flex-start"}}>
                             切片方向
-                            <Cascader size="small" style={{marginLeft:"10px",width:"75%"}} placeholder="选择方向"></Cascader>
+                            <Cascader size="small" style={{marginLeft:"10px",width:"78%"}} placeholder="选择方向"></Cascader>
                         </div>
-                        <div className="construct-window" style={{marginTop:"10px"}}>
+                        <div className="construct-window" style={{marginTop:"10px",marginBottom:"10px"}}>
                             位置(mm)
-                            <Slider defaultValue={30} style={{marginLeft:"10px",width:"70%"}} />
+                            <Slider defaultValue={30} style={{marginLeft:"10px",width:"74%"}} />
                         </div>
                         {
                             pic===0?<img
                                 src={defaultpic0}
-                                style={{width:"95%",height:"200px"}}
+                                style={{width:"100%",height:"100%"}}
                             />:<img
                                 src={defaultpic2}
-                                style={{width:"95%",height:"200px"}}
+                                style={{width:"100%",height:"100%"}}
                             />
                         }
 
@@ -313,7 +313,7 @@ function ModelConstruct() {
                 </Col>
                 <Col span={6}>
                     <Card style={{height: `calc(100vh - 168px)`, borderRadius: 0, marginRight: "12px",overflowY:"scroll"}}>
-                        <div className="datalist-side-title" style={{gap: "27px"}}>
+                        <div className="datalist-side-title" style={{gap: "27px",justifyContent:"space-between"}}>
                             孪生模型
                             <div>
                                 <Button size="small" style={{marginRight:"5px"}} icon={<DeleteOutlined/>}>
@@ -360,8 +360,8 @@ function ModelConstruct() {
                             wrapperCol={{ span: 20 }}
                             layout="horizontal"
                         >
-                            <Form.Item label="上传" valuePropName="fileList">
-                                <Upload action="/upload.do" listType="picture-card" >
+                            <Form.Item label="上传" valuePropName="fileList" style={{textAlign:"left"}}>
+                                <Upload action="/upload.do" listType="picture-card"  >
                                     <div>
                                         <InboxOutlined />
                                         <div style={{ marginTop: 8 }}>上传孪生模型</div>

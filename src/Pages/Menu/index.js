@@ -69,10 +69,10 @@ function Menu() {
     };
 
     return (
-        <section className="menu">
+        <section className="menu" style={{overflow:'scroll'}}>
             <Container>
                 <MenuHeader/>
-                <div className="menu-search">
+                <div className="menu-search" >
                     <Search style={{width: '480px'}} placeholder="搜索" allowClear onSearch={onSearch}/>
                     <br/><br/>
                     <Segmented
@@ -124,7 +124,6 @@ function Menu() {
                         </Card> : null
                     }
                     {view === "list" ?
-
                         <div style={{width: "700px", paddingLeft: "400px"}}><br/>
                             <List
                                 dataSource={data}

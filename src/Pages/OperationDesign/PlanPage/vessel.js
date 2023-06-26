@@ -25,7 +25,7 @@ function Vessel(props) {
 
     return (
                 <Card className='body-card'
-                      style={{height: `calc(100vh - 226px)`, overflowY: "scroll"}}>
+                      style={{height: `calc(100vh - 208px)`, overflowY: "scroll"}}>
                     <div>
                         {hasdata === false ?
                             <div style={{marginTop: "250px"}}>

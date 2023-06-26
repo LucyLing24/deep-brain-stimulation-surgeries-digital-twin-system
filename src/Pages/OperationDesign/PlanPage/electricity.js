@@ -81,11 +81,11 @@ function Electricity(props) {
 
     return (
                 <Card className='body-card'
-                      style={{height: `calc(100vh - 226px)`, overflowY: "scroll"}}>
+                      style={{height: `calc(100vh - 208px)`, overflowY: "scroll"}}>
 
                     <div>
                         <div className="datalist-side-title"
-                             style={{fontSize: 16, fontWeight: "bold", gap: "66px", marginBottom: 10}}>
+                             style={{fontSize: 16, fontWeight: "bold", gap: "66px", marginBottom: 10,justifyContent:"space-between"}}>
                             电极通路列表
                             <div>
                                 <Button size="small" style={{marginRight: "5px", borderRadius: 0}} icon={<DeleteOutlined/>}>
@@ -116,7 +116,7 @@ function Electricity(props) {
                             </div>
                         }
                         <div className="datalist-side-title"
-                             style={{fontSize: 16, fontWeight: "bold", gap: "66px", marginTop: "2vh"}}>
+                             style={{fontSize: 16, fontWeight: "bold", gap: "66px", marginTop: "24px"}}>
                             电极通路详情
                         </div>
                         <div>
@@ -124,7 +124,7 @@ function Electricity(props) {
                                 <div className="construct-window" style={{color: "#1890ff"}}>
                                     目标电极位置
                                 </div>
-                                <div className="construct-window">
+                                <div className="construct-window" style={{justifyContent:"space-between",textAlign:"left"}}>
                                     FB坐标(mm)
                                     <Slider
                                         min={-0.3}
@@ -132,18 +132,17 @@ function Electricity(props) {
                                         onChange={onChangeFB}
                                         value={typeof inputValueFB === 'number' ? inputValueFB : 0}
                                         step={0.01}
-                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                        defaultValue={0} style={{marginLeft: "10px", width: "34%"}}
                                     />
                                     <InputNumber
                                         min={-0.3}
                                         max={0.1}
-                                        style={{ margin: '0 12px' }}
                                         step={0.01}
                                         value={inputValueFB}
                                         onChange={onChangeFB}
                                     />
                                 </div>
-                                <div className="construct-window">
+                                <div className="construct-window" style={{justifyContent:"space-between",textAlign:"left"}}>
                                     HF坐标(mm)
                                     <Slider
                                         min={-0.2}
@@ -151,18 +150,17 @@ function Electricity(props) {
                                         onChange={onChangeHF}
                                         value={typeof inputValueHF === 'number' ? inputValueHF : 0}
                                         step={0.01}
-                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                        defaultValue={0} style={{marginLeft: "10px", width: "34%"}}
                                     />
                                     <InputNumber
                                         min={-0.2}
                                         max={0.2}
-                                        style={{ margin: '0 12px' }}
                                         step={0.01}
                                         value={inputValueHF}
                                         onChange={onChangeHF}
                                     />
                                 </div>
-                                <div className="construct-window">
+                                <div className="construct-window" style={{justifyContent:"space-between",textAlign:"left"}}>
                                     LR坐标(mm)
                                     <Slider
                                         min={-0.2}
@@ -170,24 +168,22 @@ function Electricity(props) {
                                         onChange={onChangeLR}
                                         value={typeof inputValueLR === 'number' ? inputValueLR : 0}
                                         step={0.01}
-                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                        defaultValue={0} style={{marginLeft: "10px", width: "34%"}}
                                     />
                                     <InputNumber
                                         min={-0.2}
                                         max={0.2}
-                                        style={{ margin: '0 12px' }}
                                         step={0.01}
                                         value={inputValueLR}
                                         onChange={onChangeLR}
                                     />
                                 </div>
                             </div>
-
                             <div>
-                                <div className="construct-window" style={{color: "#1890ff"}}>
+                                <div className="construct-window" style={{color: "#1890ff",marginTop:12}}>
                                     方位角度
                                 </div>
-                                <div className="construct-window">
+                                <div className="construct-window" style={{justifyContent:"space-between",textAlign:"left"}}>
                                     FB轴(度)
                                     <Slider
                                         min={-90}
@@ -195,18 +191,17 @@ function Electricity(props) {
                                         onChange={onChangeFBAxle}
                                         value={typeof inputValueFBAxle === 'number' ? inputValueFBAxle : 0}
                                         step={1}
-                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                        defaultValue={0} style={{marginLeft: "10px", width: "44%"}}
                                     />
                                     <InputNumber
                                         min={-90}
                                         max={90}
-                                        style={{ margin: '0 12px' }}
                                         step={1}
                                         value={inputValueFBAxle}
                                         onChange={onChangeFBAxle}
                                     />
                                 </div>
-                                <div className="construct-window">
+                                <div className="construct-window" style={{justifyContent:"space-between",textAlign:"left"}}>
                                     HF轴(度)
                                     <Slider
                                         min={-90}
@@ -214,18 +209,17 @@ function Electricity(props) {
                                         onChange={onChangeHFAxle}
                                         value={typeof inputValueHFAxle === 'number' ? inputValueHFAxle : 0}
                                         step={1}
-                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                        defaultValue={0} style={{marginLeft: "10px", width: "44%"}}
                                     />
                                     <InputNumber
                                         min={-90}
                                         max={90}
-                                        style={{ margin: '0 12px' }}
                                         step={1}
                                         value={inputValueHFAxle}
                                         onChange={onChangeHFAxle}
                                     />
                                 </div>
-                                <div className="construct-window">
+                                <div className="construct-window" style={{justifyContent:"space-between",textAlign:"left"}}>
                                     LR轴(度)
                                     <Slider
                                         min={-90}
@@ -233,12 +227,11 @@ function Electricity(props) {
                                         onChange={onChangeLRAxle}
                                         value={typeof inputValueLRAxle === 'number' ? inputValueLRAxle : 0}
                                         step={1}
-                                        defaultValue={0} style={{marginLeft: "30px", width: "24%"}}
+                                        defaultValue={0} style={{marginLeft: "10px", width: "44%"}}
                                     />
                                     <InputNumber
                                         min={-90}
                                         max={90}
-                                        style={{ margin: '0 12px' }}
                                         step={1}
                                         value={inputValueLRAxle}
                                         onChange={onChangeLRAxle}

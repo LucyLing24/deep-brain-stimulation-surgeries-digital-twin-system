@@ -2,6 +2,15 @@
 
 Digital-twin System Enabled Deep Brain Stimulation Surgeries.} Implemented the system, including modeling the brain nuclei with Unity, embedding the React web page with Webgl, and achieving bidirectional communication between React and Webgl.
 
+## How to start
+* Environment: node, React (need to install in your local environment)
+* Open the terminal of the project 
+  * install packages
+    1. $ npm install
+  * start project
+    2. $ npm start
+
+
 ## Video Introduction (Chinese)
  [![Watch the video](https://img.youtube.com/vi/uXL2lHH6JdY/maxresdefault.jpg)](https://youtu.be/uXL2lHH6JdY)
  * video link: https://youtu.be/uXL2lHH6JdY

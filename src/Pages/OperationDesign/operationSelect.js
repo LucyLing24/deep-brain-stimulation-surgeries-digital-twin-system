@@ -25,7 +25,7 @@ function OperationSelect(props) {
             <Col span={6}>
                 <Card className='body-card'
                       style={{height: `calc(100vh - 168px)`, marginLeft: 12, position: "relative"}}>
-                    <div className="view-title">
+                    <div className="view-title" >
                         选择孪生模型
                     </div>
                     <div>

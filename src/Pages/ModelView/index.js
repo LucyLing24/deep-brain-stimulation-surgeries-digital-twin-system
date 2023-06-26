@@ -23,11 +23,11 @@ import Unity, {UnityContext} from "react-unity-webgl";
 import defaultpic1 from "../../Assets/PatientInfo/defaultpic1.png";
 
 const unityContext = new UnityContext({
-    loaderUrl: "Scene2_WebGL/Build/Scene2_WebGL.asm.loader.js",
-    dataUrl: "Scene2_WebGL/Build/Scene2_WebGL.data",
-    frameworkUrl: "Scene2_WebGL/Build/Scene2_WebGL.asm.framework.js",
-    codeUrl: "Scene2_WebGL/Build/Scene2_WebGL.asm.js",
-    memoryUrl:"Scene2_WebGL/Build/Scene2_WebGL.asm.mem",
+    loaderUrl: "Scene2/Build/Scene2.asm.loader.js",
+    dataUrl: "Scene2/Build/Scene2.data",
+    frameworkUrl: "Scene2/Build/Scene2.asm.framework.js",
+    codeUrl: "Scene2/Build/Scene2.asm.js",
+    memoryUrl:"Scene2/Build/Scene2.asm.mem",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "DefaultCompany",
     productName: "UnityVolumeRendering",
@@ -136,6 +136,19 @@ function ModelView() {
             file:"DT Model026",
             date:"11/12/2022",
             stage:"术前影像阶段"
+        },
+        {key:3,
+            index:"1",
+            file:"DT Model027",
+            date:"11/12/2022",
+            stage:"术前影像阶段"
+
+        },
+        {key:4,
+            index:"2",
+            file:"DT Model028",
+            date:"11/12/2022",
+            stage:"术前影像阶段"
         }
     ];
 
@@ -163,7 +176,7 @@ function ModelView() {
             <Row gutter={12}>
                 <Col span={6}>
                     <Card style={{height: `calc(100vh - 168px)`, borderRadius: 0, marginLeft: "12px",overflowY:"scroll"}}>
-                        <div className="view-title">
+                        <div className="view-title" style={{justifyContent:"space-between"}}>
                             孪生模型查看
                             <Button size="small" style={{background: '#1890FF', color: "white"}}>
                                 选择孪生模型
@@ -225,11 +238,11 @@ function ModelView() {
                                 <Radio></Radio>
                             </div>
                         </div>
-                        <div>
+                        <div style={{justifyContent:"space-between"}}>
                             <div className="datalist-side-title" style={{marginTop:"10px",fontSize: "15px"}}>
                                 HU值滤镜
                             </div>
-                            <div className="construct-window" style={{marginBottom:10}}>
+                            <div className="construct-window" style={{marginBottom:10,justifyContent:"space-between"}} >
                                 显示范围
                                 <Slider
                                     min={0}
@@ -237,12 +250,11 @@ function ModelView() {
                                     onChange={onChange}
                                     value={typeof inputValue === 'number' ? inputValue : 0}
                                     step={0.01}
-                                    defaultValue={0.4} style={{marginLeft: "30px", width: "30%"}}
+                                    defaultValue={0.4} style={{marginLeft: "30px", width: "40%"}}
                                 />
                                 <InputNumber
                                     min={0}
                                     max={0.8}
-                                    style={{ margin: '0 12px' }}
                                     step={0.01}
                                     value={inputValue}
                                     onChange={onChange}

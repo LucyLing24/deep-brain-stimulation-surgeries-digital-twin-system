@@ -108,7 +108,7 @@ function Area(props) {
 
     return (
                 <Card className='body-card'
-                      style={{height: `calc(100vh - 226px)`,  overflowY: "scroll"}}>
+                      style={{height: `calc(100vh - 208px)`,  overflowY: "scroll"}}>
 
                     <div style={{width: '100%', height: `63vh`}}>
                         <div>
@@ -123,7 +123,7 @@ function Area(props) {
                                 columns={operation_plan_area_columns}
                                 dataSource={operation_plan_area_data}
                                 rowSelection={rowSelection}
-                                scroll={{y: "36vh"}}
+                                scroll={{y: "36vh",x:"400px"}}
                             />
                             <div>
                                 <Typography.Text style={{
