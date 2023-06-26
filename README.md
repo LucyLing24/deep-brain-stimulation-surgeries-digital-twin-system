@@ -5,10 +5,8 @@ Digital-twin System Enabled Deep Brain Stimulation Surgeries.} Implemented the s
 ## How to start
 * Environment: node, React (need to install in your local environment)
 * Open the terminal of the project 
-  * install packages
-    1. $ npm install
-  * start project
-    2. $ npm start
+  1. $ npm install
+  2. $ npm start
 
 
 ## Video Introduction (Chinese)
